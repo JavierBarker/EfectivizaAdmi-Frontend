@@ -17,20 +17,23 @@ export class UserService {
     this.url = GLOBAL.url
   }
 
-  login(user: any, getToken = ""): Observable<any>{
+  login(user: any, getToken = true): Observable<any>{
 
-    if(getToken != null){
-      user.getToken = getToken;
-    }
-
-    let params = JSON.stringify(user);
-
-    return this.http.post(`${this.url}/login`,params,{headers: this.headersVar});
+    return this.http.post(`${this.url}/login`,{...user,getToken},{headers: this.headersVar});
 
   }
 
+  /*presionar():Observable<any>{
+
+    var token = this.getToken();
+    var headers = new HttpHeaders({'Authorization':token})
+
+    return this.http.get(`${this.url}/presionar`,{headers: headers})
+
+  }*/
+
   getIdentity(){
-    var identidty2 = JSON.stringify(localStorage.getItem('identidad'));
+    var identidty2 = JSON.stringify(localStorage.getItem('identity'));
     if(identidty2 != 'undefined'){
       this.identity = identidty2
     }else{
@@ -41,9 +44,11 @@ export class UserService {
   }
 
   getToken(){
-    var token2 = localStorage.getItem('token');
-    if(token2 != 'undefined'){
-      this.token = token2;
+    var token2: any = localStorage.getItem('identity');
+    token2 = JSON.parse(token2)
+
+    if(token2.token != 'undefined'){
+      this.token = token2.token;
     }else{
       this.token = null;
     }
