@@ -17,20 +17,23 @@ export class UserService {
     this.url = GLOBAL.url
   }
 
-  login(user: any, getToken = true): Observable<any>{
+  login(user: any, getToken = null): Observable<any>{
 
-    return this.http.post(`${this.url}/login`,{...user,getToken},{headers: this.headersVar});
+    if(getToken != null){
+      user.getToken = getToken;
+    }
+    return this.http.post(`${this.url}/login`,user,{headers: this.headersVar});
 
   }
 
-  /*presionar():Observable<any>{
+  presionar():Observable<any>{
 
     var token = this.getToken();
     var headers = new HttpHeaders({'Authorization':token})
 
     return this.http.get(`${this.url}/presionar`,{headers: headers})
 
-  }*/
+  }
 
   getIdentity(){
     var identidty2 = JSON.stringify(localStorage.getItem('identity'));

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-login',
@@ -28,15 +30,39 @@ export class LoginComponent implements OnInit {
     })
   }
 
+
+
+  setToken(){
+    this.userService.login(this.loginForm.value, 'true').subscribe(
+      response =>{
+        this.token = response.token;
+        localStorage.setItem('token', this.token);
+        this.router.navigate(['/homePage']);
+      }
+    )
+  }
+
   login(){
-    this.userService.login(this.loginForm.value).subscribe(
+    this.userService.login(this.loginForm.value, 'false').subscribe(
       response =>{
 
-        let user = response.userFound;
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'User Logged in Correctly',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+        /*let user = response.userFound;
         user.token = response.token;
         this.router.navigate(['/homePage'])
         this.identity = response.token;
-        localStorage.setItem('identity',JSON.stringify(user));
+        localStorage.setItem('identity',JSON.stringify(user));*/
+        
+        this.identity = response.userFound;
+        localStorage.setItem('identity',JSON.stringify(this.identity));
+        this.setToken();
 
       }
     )
