@@ -1,1 +1,16 @@
-<p>home-page works!</p>
+<div>
+    <div class="py-4 artboard artboard-demo bg-gray-200">
+        <ul class="menu items-stretch px-3 shadow-lg bg-base-100 horizontal rounded-box">
+          <li *ngFor="let data of MenuItem">
+                <a [routerLink]="data.link">
+                  {{data.title}}
+                  
+                </a>
+          </li> 
+        </ul>
+    </div>
+    
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
