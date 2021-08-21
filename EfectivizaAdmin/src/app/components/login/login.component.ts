@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
 
   setToken(){
-    this.userService.login(this.loginForm.value, 'true').subscribe(
+    this.userService.login(this.loginForm.value, true).subscribe(
       response =>{
         this.token = response.token;
         localStorage.setItem('token', this.token);
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.userService.login(this.loginForm.value, 'false').subscribe(
+    this.userService.login(this.loginForm.value, false).subscribe(
       response =>{
 
         Swal.fire({
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/homePage'])
         this.identity = response.token;
         localStorage.setItem('identity',JSON.stringify(user));*/
-        
+
         this.identity = response.userFound;
         localStorage.setItem('identity',JSON.stringify(this.identity));
         this.setToken();

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -23,9 +24,16 @@ export class HomePageComponent implements OnInit {
       link: '/homePage/component2'
     }
   ];
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  logOut(){
+
+    localStorage.clear();
+    this.router.navigate(['/login'])
+
   }
 
 }
