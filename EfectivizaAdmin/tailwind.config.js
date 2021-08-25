@@ -1,6 +1,7 @@
 module.exports = {
   purge: [],
-  darkMode: false, // or 'media' or 'class'
+  purge: [ './src/**/*.{html, ts}', './projects/**/*.{html, ts}' ],
+  retroMode: true,
   theme: {
     extend: {},
   },

@@ -35,6 +35,19 @@ export class UserService {
 
   }
 
+  createUser(user: any):Observable<any>{
+    let params = JSON.stringify(user);
+    let headersToken = this.headersVar.set('Authorization', this.getToken());
+    return this.http.post(`${this.url}/createUser`, params, {headers: headersToken} );
+  }
+
+
+  getUsers():Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', this.getToken());
+    return this.http.get(`${this.url}/getUsers`, {headers: headersToken});
+  }
+
+
   getIdentity(){
     var identidty2 = JSON.stringify(localStorage.getItem('identity'));
     if(identidty2 != 'undefined'){
@@ -47,8 +60,9 @@ export class UserService {
   }
 
   getToken(){
-    var token2: any = localStorage.getItem('identity');
-    token2 = JSON.parse(token2)
+    /*
+    var token2: any = localStorage.getItem('token');
+    //token2 = JSON.parse(token2)
 
     if(token2.token != 'undefined'){
       this.token = token2.token;
@@ -56,6 +70,13 @@ export class UserService {
       this.token = null;
     }
 
+    return this.token;*/
+    var token2 = localStorage.getItem('token');
+    if(token2 != 'undefined'){
+      this.token = token2;
+    }else{
+      this.token = null;
+    }
     return this.token;
   }
 
