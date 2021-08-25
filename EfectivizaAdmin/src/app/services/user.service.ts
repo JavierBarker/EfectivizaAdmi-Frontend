@@ -47,6 +47,21 @@ export class UserService {
     return this.http.get(`${this.url}/getUsers`, {headers: headersToken});
   }
 
+  getUserId(id: string):Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', this.getToken());
+    return this.http.get(`${this.url}/getUserId/${id}`, {headers: headersToken});
+  }
+
+  deleteUser(id: string): Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', this.getToken());
+    return this.http.delete(`${this.url}/deleteUser/${id}`, {headers: headersToken});
+  }
+
+  editUser(id: string, user: any): Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', this.getToken());
+    return this.http.put(`${this.url}/editUser/${id}`,user, {headers: headersToken});
+  }
+
 
   getIdentity(){
     var identidty2 = JSON.stringify(localStorage.getItem('identity'));
