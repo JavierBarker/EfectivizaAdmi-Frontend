@@ -17,13 +17,21 @@
                 DaisyUI
               </span>
       </div>
-      <div class="flex-1 px-2 mx-2">
-        <div *ngFor="let data of MenuItem" class="items-stretch hidden lg:flex">
+      <div *ngIf="userLogged.rol ==='ROL_ADMIN'" class="flex-1 px-2 mx-2">
+          <div *ngFor="let data of MenuItemAdmin" class="items-stretch hidden lg:flex">
+            <a [routerLink]="data.link" class="btn btn-ghost btn-sm rounded-btn">
+              {{data.title}}
+            </a>
+          </div>
+      </div>
+
+      <div *ngIf="userLogged.rol ==='ROL_CLIENTE'" class="flex-1 px-2 mx-2">
+        <div *ngFor="let data of MenuItemClient" class="items-stretch hidden lg:flex">
           <a [routerLink]="data.link" class="btn btn-ghost btn-sm rounded-btn">
             {{data.title}}
           </a>
         </div>
-      </div>
+    </div>
 
       <div class="flex-1 lg:flex-none">
         <div class="form-control">
