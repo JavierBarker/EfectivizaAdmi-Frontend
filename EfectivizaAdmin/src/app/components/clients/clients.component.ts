@@ -12,18 +12,29 @@ import Swal from 'sweetalert2'
 export class ClientsComponent implements OnInit {
 
   public clientForm = this.buildForm();
-  public token; 
+  public clientEditForm = this.editForm();
+  public token;
   public getUserVar: any;
+  public getUserId: any;
+  public formEditChanges: any = {};
 
   constructor(
     private userService: UserService,
-    private router: Router, 
+    private router: Router,
     private fmBuilder: FormBuilder) {
       //this.token = this.userService.getToken();
     }
 
   ngOnInit(): void {
     this.getUser();
+    this.clientEditForm.valueChanges.subscribe(
+      value=>{
+        if(value.dpi !== this.getUserId.dpi) this.formEditChanges.dpi  = value.dpi;
+        if(value.name!==this.getUserId.name) this.formEditChanges.name = value.name;
+        if( value.lastname !== this.getUserId.lastname ) this.formEditChanges.lastname = value.lastname
+        if(value.username !== this.getUserId.username) this.formEditChanges.username = value.username
+      }
+    )
   }
 
   buildForm(){
@@ -37,6 +48,15 @@ export class ClientsComponent implements OnInit {
     })
   }
 
+  editForm(){
+    return this.fmBuilder.group({
+      dpi      : ['', Validators.required],
+      name     : ['', Validators.required],
+      lastname : ['', Validators.required],
+      username : ['', Validators.required],
+    })
+  }
+
 
   getUser(){
     this.userService.getUsers().subscribe(
@@ -46,10 +66,20 @@ export class ClientsComponent implements OnInit {
     )
   }
 
+  getIdUser(id: string){
+
+    this.userService.getUserId(id).subscribe(
+      response=>{
+        this.getUserId = response.foundUser;
+      }
+    )
+
+  }
+
   addUser(){
     this.userService.createUser(this.clientForm.value).subscribe(
       response =>{
-        
+
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -58,16 +88,63 @@ export class ClientsComponent implements OnInit {
           timer: 1500
         })
 
-        
+
 
         this.showCreateModal = false;
         this.getUser();
-        
+
+      }
+    )
+  }
+
+  deleteUser(id: string){
+
+    this.userService.deleteUser(id).subscribe(
+      response=>{
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Usuario Eliminado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.showDeleteModal = false;
+        this.getUser();
+
+
+      },
+      error=>{
+        console.log(<any>error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'No se pudo Eliminar el usuario',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+      }
+
+    )
+
+  }
+
+  editUser(id: string){
+    this.userService.editUser(id,this.formEditChanges).subscribe(
+      response=>{
+        this.getUser();
+        this.showEditModal = false;
+      },
+      error=>{
+        console.log(<any>error);
+
       }
     )
   }
 
   showCreateModal: boolean = false;
-  
+  showEditModal: boolean = false;
+  showDeleteModal: boolean = false;
+
 
 }
