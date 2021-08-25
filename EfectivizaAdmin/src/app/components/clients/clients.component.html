@@ -57,7 +57,8 @@
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
-                                <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">{{users.rol}}</span>
+                                <span
+                                    class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">{{users.rol}}</span>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
@@ -71,14 +72,18 @@
                                                 d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
                                     </div>
-                                    <div  *ngIf="users.rol !=='ROL_ADMIN'" (click)="showEditModal = true; getIdUser(users._id)" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                    <div *ngIf="users.rol !=='ROL_ADMIN'"
+                                        (click)="showEditModal = true; getIdUser(users._id)"
+                                        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                         </svg>
                                     </div>
-                                    <div *ngIf="users.rol !=='ROL_ADMIN'" (click)="showDeleteModal = true; getIdUser(users._id)" class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                    <div *ngIf="users.rol !=='ROL_ADMIN'"
+                                        (click)="showDeleteModal = true; getIdUser(users._id)"
+                                        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,7 +100,7 @@
     </div>
 
 
-
+    <!--MODAL AGREGAR-->
     <div data-theme="light" class="modal-container">
         <input type="checkbox" id="search-modal" [checked]="showCreateModal" class="modal-toggle">
         <div class="modal bg-opacity-50 bg-blacks">
@@ -114,42 +119,43 @@
 
                                     <div class="mb-4">
                                         <label class="block text-grey-darker text-sm font-bold mb-2">DPI:</label>
-                                        <input formControlName="dpi" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                            type="text" name="student_id" id="student_id" value=""
-                                            placeholder="Ingresa el DPI">
+                                        <input formControlName="dpi" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                            name="student_id" id="student_id" value="" placeholder="Ingresa el DPI">
 
                                     </div>
 
                                     <div class="mb-4">
                                         <label class="block text-grey-darker text-sm font-bold mb-2">Nombre:</label>
-                                        <input formControlName="name" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                            type="text" name="nombre" id="nombre" value=""
-                                            placeholder="Ingrese el Nombre">
+                                        <input formControlName="name" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                            name="nombre" id="nombre" value="" placeholder="Ingrese el Nombre">
 
                                     </div>
 
                                     <div class="mb-4">
                                         <label class="block text-grey-darker text-sm font-bold mb-2">Apellido:</label>
-                                        <input formControlName="lastname" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                            type="text" name="apellido" id="apellido" value=""
-                                            placeholder="Ingrese el Apellido">
+                                        <input formControlName="lastname" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                            name="apellido" id="apellido" value="" placeholder="Ingrese el Apellido">
                                         <p id=error_creater_id></p>
                                     </div>
 
                                     <div class="mb-4">
                                         <label class="block text-grey-darker text-sm font-bold mb-2">Nombre de
                                             Usuario:</label>
-                                        <input formControlName="username" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                            type="text" name="usuario" id="usuario" value=""
+                                        <input formControlName="username" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                            name="usuario" id="usuario" value=""
                                             placeholder="Ingrese el Nombre de Usuario">
                                         <p id=error_creater_id></p>
                                     </div>
 
                                     <div class="mb-4">
                                         <label class="block text-grey-darker text-sm font-bold mb-2">Contraseña:</label>
-                                        <input formControlName="password" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                            type="password" name="password" id="password" value=""
-                                            placeholder="Ingrese la Contraseña">
+                                        <input formControlName="password" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="password"
+                                            name="password" id="password" value="" placeholder="Ingrese la Contraseña">
                                         <p id=error_creater_id></p>
                                     </div>
 
@@ -158,8 +164,8 @@
                                         <select formControlName="rol" id="role_id" name="role"
                                             class=" border rounded w-full py-2 px-3 text-grey-darker">
                                             <option value="">-- Selecciona un Rol --</option>
-                                            <option >ROL_CLIENTE</option>
-                                            <option >ROL_ADMIN</option>
+                                            <option>ROL_CLIENTE</option>
+                                            <option>ROL_ADMIN</option>
                                         </select>
                                         <p id=error_creater_id></p>
                                     </div>
@@ -170,7 +176,7 @@
 
                                     <label (click)="showCreateModal = false" for="search-modal"
                                         class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
-                                    <button  for="search-modal" type="submit"
+                                    <button for="search-modal" type="submit"
                                         class="btn-modal-close btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Agregar</button>
                                 </div>
                                 <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
@@ -187,130 +193,131 @@
 
             </div>
         </div>
+    </div>
 
+    <!--MODAL EDITAR-->
+    <div data-theme="light" class="modal-container">
+        <input type="checkbox" id="search-modal" [checked]="showEditModal" class="modal-toggle">
+        <div class="modal bg-opacity-50 bg-blacks">
+            <div class="modal-box p-0 pt-6 text-left">
 
-        <div data-theme="light" class="modal-container">
-          <input type="checkbox" id="search-modal" [checked]="showEditModal" class="modal-toggle">
-          <div class="modal bg-opacity-50 bg-blacks">
-              <div class="modal-box p-0 pt-6 text-left">
+                <div class="w-full bg-grey-500">
+                    <div class="container mx-auto py-8">
+                        <div class="w-96 mx-auto bg-white rounded border border-green-500">
 
-                  <div class="w-full bg-grey-500">
-                      <div class="container mx-auto py-8">
-                          <div class="w-96 mx-auto bg-white rounded border border-green-500">
+                            <div class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">
+                                Editar Usuario
+                            </div>
 
-                              <div class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">
-                                  Editar Usuario
-                              </div>
-
-                              <form name="student_application" id="student_application" action="" [formGroup]="clientEditForm" (ngSubmit)="editUser(getUserId._id)">
+                            <form name="student_application" id="student_application" action=""
+                                [formGroup]="clientEditForm" (ngSubmit)="editUser(getUserId._id)">
 
 
                                 <div class="py-4 px-8">
 
-                                  <div class="mb-4">
-                                      <label class="block text-grey-darker text-sm font-bold mb-2">DPI:</label>
-                                      <input formControlName="dpi" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                          type="text" name="student_id" id="student_id" [value]="getUserId?.dpi"
-                                          placeholder="Edite el DPI">
+                                    <div class="mb-4">
+                                        <label class="block text-grey-darker text-sm font-bold mb-2">DPI:</label>
+                                        <input formControlName="dpi" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                            name="student_id" id="student_id" [value]="getUserId?.dpi"
+                                            placeholder="Edite el DPI">
 
-                                  </div>
+                                    </div>
 
-                                  <div class="mb-4">
-                                      <label class="block text-grey-darker text-sm font-bold mb-2">Nombre:</label>
-                                      <input formControlName="name" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                          type="text" name="nombre" id="nombre" [value]="getUserId?.name"
-                                          placeholder="Edite el Nombre">
+                                    <div class="mb-4">
+                                        <label class="block text-grey-darker text-sm font-bold mb-2">Nombre:</label>
+                                        <input formControlName="name" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                            name="nombre" id="nombre" [value]="getUserId?.name"
+                                            placeholder="Edite el Nombre">
 
-                                  </div>
+                                    </div>
 
-                                  <div class="mb-4">
-                                      <label class="block text-grey-darker text-sm font-bold mb-2">Apellido:</label>
-                                      <input formControlName="lastname" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                          type="text" name="apellido" id="apellido" [value]="getUserId?.lastname"
-                                          placeholder="Edite el Apellido">
-                                      <p id=error_creater_id></p>
-                                  </div>
+                                    <div class="mb-4">
+                                        <label class="block text-grey-darker text-sm font-bold mb-2">Apellido:</label>
+                                        <input formControlName="lastname" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                            name="apellido" id="apellido" [value]="getUserId?.lastname"
+                                            placeholder="Edite el Apellido">
+                                        <p id=error_creater_id></p>
+                                    </div>
 
-                                  <div class="mb-4">
-                                      <label class="block text-grey-darker text-sm font-bold mb-2">Nombre de
-                                          Usuario:</label>
-                                      <input formControlName="username" required class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                          type="text" name="usuario" id="usuario" [value]="getUserId?.username"
-                                          placeholder="Edite el Nombre de Usuario">
-                                      <p id=error_creater_id></p>
-                                  </div>
-
-
-                              </div>
-
-                              <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
-
-                                <label (click)="showEditModal = false" for="search-modal"
-                                    class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
-                                <button  for="search-modal" type="submit"
-                                    class="btn-modal-close btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Editar</button>
-                            </div>
-                            <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+                                    <div class="mb-4">
+                                        <label class="block text-grey-darker text-sm font-bold mb-2">Nombre de
+                                            Usuario:</label>
+                                        <input formControlName="username" required
+                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                            name="usuario" id="usuario" [value]="getUserId?.username"
+                                            placeholder="Edite el Nombre de Usuario">
+                                        <p id=error_creater_id></p>
+                                    </div>
 
 
-                            </div>
+                                </div>
+
+                                <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+
+                                    <label (click)="showEditModal = false" for="search-modal"
+                                        class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
+                                    <button for="search-modal" type="submit"
+                                        class="btn-modal-close btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Editar</button>
+                                </div>
+                                <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
 
 
-                              </form>
-
-                          </div>
-
-                      </div>
-                  </div>
+                                </div>
 
 
-              </div>
-          </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
     </div>
 
 
-
+    <!--MODAL ELIMINAR-->
     <div data-theme="light" class="modal-container">
-      <input type="checkbox" id="search-modal" [checked]="showDeleteModal" class="modal-toggle">
-      <div class="modal bg-opacity-50 bg-blacks">
-          <div class="modal-box p-0 pt-6 text-left">
+        <input type="checkbox" id="search-modal" [checked]="showDeleteModal" class="modal-toggle">
+        <div class="modal bg-opacity-50 bg-blacks">
+            <div class="modal-box p-0 pt-6 text-left">
 
-              <div class="w-full bg-grey-500">
-                  <div class="container mx-auto py-8">
-                      <div class="w-96 mx-auto bg-white rounded border border-green-500">
+                <div class="w-full bg-grey-500">
+                    <div class="container mx-auto py-8">
+                        <div class="w-96 mx-auto bg-white rounded border border-green-500">
 
-                          <div class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">
-                              Eliminar  Usuario
-                          </div>
+                            <div class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500">
+                                Eliminar Usuario
+                            </div>
 
-                          <form action="">
+                            <form action="">
 
-                            <h1 class="text-center p-4">¿Está seguro que desea eliminar este usuario?</h1>
+                                <h1 class="text-center p-4">¿Está seguro que desea eliminar este usuario?</h1>
 
-                              <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+                                <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
 
-                                  <label (click)="showDeleteModal = false" for="search-modal"
-                                      class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
-                                  <button (click)="deleteUser(getUserId._id)"  for="search-modal" type="submit"
-                                      class="btn-modal-close btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Eliminar</button>
-                              </div>
-                              <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
-
-
-                              </div>
-                          </form>
-
-                      </div>
-
-                  </div>
-              </div>
+                                    <label (click)="showDeleteModal = false" for="search-modal"
+                                        class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
+                                    <button (click)="deleteUser(getUserId._id)" for="search-modal" type="submit"
+                                        class="btn-modal-close btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Eliminar</button>
+                                </div>
+                                <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
 
 
-          </div>
-      </div>
-</div>
+                                </div>
+                            </form>
 
-</div>
+                        </div>
+
+                    </div>
+                </div>
 
 
-
+            </div>
+        </div>
+    </div>

@@ -92,6 +92,7 @@ export class ClientsComponent implements OnInit {
 
         this.showCreateModal = false;
         this.getUser();
+        this.clientForm.reset();
 
       }
     )
@@ -130,10 +131,24 @@ export class ClientsComponent implements OnInit {
   }
 
   editUser(id: string){
+    if (this.formEditChanges.dpi.length === 0) {
+      delete this.formEditChanges.dpi;
+    }
+    if (this.formEditChanges.name.length === 0) {
+      delete this.formEditChanges.name;
+    }
+    if (this.formEditChanges.lastname.length === 0) {
+      delete this.formEditChanges.lastname;
+    }
+    if (this.formEditChanges.username.length === 0) {
+      delete this.formEditChanges.username;
+    }
     this.userService.editUser(id,this.formEditChanges).subscribe(
       response=>{
+        
         this.getUser();
         this.showEditModal = false;
+
       },
       error=>{
         console.log(<any>error);
