@@ -9,7 +9,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HomePageComponent implements OnInit {
 
-  MenuItem= [
+  userLogged: any;
+
+  MenuItemAdmin= [
+    {
+      title: 'Principal',
+      link: '/homePage/mainPage'
+    },
     {
       title: 'clientes',
       link: '/homePage/clients'
@@ -24,9 +30,29 @@ export class HomePageComponent implements OnInit {
       link: '/homePage/component2'
     }
   ];
-  constructor(private userService: UserService, private router: Router) { }
+
+  MenuItemClient= [
+    {
+      title: 'Principal',
+      link: '/homePage/mainPage'
+    },
+    {
+      title: 'componente 1',
+      link: '/homePage/component1',
+      selected: true
+    },
+    {
+      title: 'componente 2',
+      link: '/homePage/component2'
+    }
+  ];
+
+  constructor(private userService: UserService, private router: Router) {
+    this.userLogged = this.userService.getIdentity();
+  }
 
   ngOnInit(): void {
+
   }
 
   logOut(){

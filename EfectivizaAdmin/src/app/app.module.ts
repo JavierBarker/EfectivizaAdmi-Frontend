@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Component1Component } from './components/component1/component1.component';
 import { Component2Component } from './components/component2/component2.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { Component2Component } from './components/component2/component2.componen
     ClientsComponent,
     LoginComponent,
     Component1Component,
-    Component2Component
+    Component2Component,
+    MainPageComponent
   ],
   imports: [
     BrowserModule,
