@@ -64,6 +64,17 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('identity',JSON.stringify(this.identity));
         this.setToken();
 
+      },
+      error=>{
+
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Verifique si los datos son correctos',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
       }
     )
   }
