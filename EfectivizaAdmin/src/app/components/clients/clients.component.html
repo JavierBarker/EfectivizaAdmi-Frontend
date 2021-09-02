@@ -445,7 +445,7 @@
                                     <label (click)="showClientModal = false" for="search-modal"
                                         class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
                                     <button *ngIf="getUserId?.rol !=='ROL_ADMIN'"
-                                        class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Agregar Prestamo</button>
+                                        class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium" [routerLink]="['/homePage/loansClient', getUserId?._id]">Agregar Prestamo</button>
                                 </div>
                                 <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
                                 </div>

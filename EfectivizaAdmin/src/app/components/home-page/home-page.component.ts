@@ -24,10 +24,6 @@ export class HomePageComponent implements OnInit {
       title: 'Prestamos',
       link: '/homePage/loans',
       selected: true
-    },
-    {
-      title: 'componente 2',
-      link: '/homePage/component2'
     }
   ];
 
