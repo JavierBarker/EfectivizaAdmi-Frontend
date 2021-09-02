@@ -3,7 +3,7 @@
         <a (click)="showCreateModal = true" class="btn btn-primary ">agregar cliente</a>
     </div>
 
-    <div class="  flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+    <div class=" h-screen flex items-start justify-center bg-gray-100 font-sans overflow-hidden">
         <div class="w-full lg:w-5/6">
             <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">
@@ -12,6 +12,7 @@
                             <th class="py-3 px-6 text-left">DPI</th>
                             <th class="py-3 px-6 text-left">Nombre Completo</th>
                             <th class="py-3 px-6 text-center">Usuario</th>
+                            <th class="py-3 px-6 text-left">Contactos</th>
                             <th class="py-3 px-6 text-center">Rol</th>
                             <th class="py-3 px-6 text-center">Acciones</th>
                         </tr>
@@ -57,12 +58,20 @@
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
+                                <div class="grid grid-rows-2 items-center">
+                                    <span>{{ users.phone }}</span>
+                                    <span *ngIf="!users.email">Sin Correo</span>
+                                    <span *ngIf="users.email">{{ users.email }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
                                 <span
                                     class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">{{users.rol}}</span>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
-                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                    <div (click)="showClientModal = true; getIdUser(users._id)"
+                                        class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
 
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
@@ -103,7 +112,7 @@
     <!--MODAL AGREGAR-->
     <div data-theme="light" class="modal-container">
         <input type="checkbox" id="search-modal" [checked]="showCreateModal" class="modal-toggle">
-        <div class="modal bg-opacity-50 bg-blacks">
+        <div class="modal bg-opacity-50 bg-blacks overflow-auto">
             <div class="modal-box p-0 pt-6 text-left">
 
                 <div class="w-full bg-grey-500">
@@ -125,20 +134,40 @@
 
                                     </div>
 
-                                    <div class="mb-4">
-                                        <label class="block text-grey-darker text-sm font-bold mb-2">Nombre:</label>
-                                        <input formControlName="name" required
-                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                                            name="nombre" id="nombre" value="" placeholder="Ingrese el Nombre">
+                                    <div class="grid lg:grid-cols-2">
+                                        <div class="mb-4 pr-2">
+                                            <label class="block text-grey-darker text-sm font-bold mb-2">Nombre:</label>
+                                            <input formControlName="name" required
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                                name="nombre" id="nombre" value="" placeholder="Ingrese Nombre">
+                                        </div>
 
+                                        <div class="mb-4">
+                                            <label
+                                                class="block text-grey-darker text-sm font-bold mb-2">Apellido:</label>
+                                            <input formControlName="lastname" required
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                                name="apellido" id="apellido" value="" placeholder="Ingrese Apellido">
+                                            <p id=error_creater_id></p>
+                                        </div>
                                     </div>
 
-                                    <div class="mb-4">
-                                        <label class="block text-grey-darker text-sm font-bold mb-2">Apellido:</label>
-                                        <input formControlName="lastname" required
-                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                                            name="apellido" id="apellido" value="" placeholder="Ingrese el Apellido">
-                                        <p id=error_creater_id></p>
+                                    <div class="grid lg:grid-cols-2">
+                                        <div class="mb-4 pr-2">
+                                            <label
+                                                class="block text-grey-darker text-sm font-bold mb-2">Teléfono:</label>
+                                            <input formControlName="phone" required
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker" type="number"
+                                                value="" placeholder="Ingrese Telefono">
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label class="block text-grey-darker text-sm font-bold mb-2">Correo:</label>
+                                            <input formControlName="email" required
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker" type="email"
+                                                value="" placeholder="Correo (opcional)">
+                                            <p id=error_creater_id></p>
+                                        </div>
                                     </div>
 
                                     <div class="mb-4">
@@ -224,23 +253,48 @@
 
                                     </div>
 
-                                    <div class="mb-4">
-                                        <label class="block text-grey-darker text-sm font-bold mb-2">Nombre:</label>
-                                        <input formControlName="name" required
-                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                                            name="nombre" id="nombre" [value]="getUserId?.name"
-                                            placeholder="Edite el Nombre">
+                                    <div class="grid grid-cols-2">
+                                        <div class="mb-4 pr-2">
+                                            <label class="block text-grey-darker text-sm font-bold mb-2">Nombre:</label>
+                                            <input formControlName="name" required
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                                name="nombre" id="nombre" [value]="getUserId?.name"
+                                                placeholder="Edite el Nombre">
+
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label
+                                                class="block text-grey-darker text-sm font-bold mb-2">Apellido:</label>
+                                            <input formControlName="lastname" required
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
+                                                name="apellido" id="apellido" [value]="getUserId?.lastname"
+                                                placeholder="Edite el Apellido">
+                                            <p id=error_creater_id></p>
+                                        </div>
 
                                     </div>
 
-                                    <div class="mb-4">
-                                        <label class="block text-grey-darker text-sm font-bold mb-2">Apellido:</label>
-                                        <input formControlName="lastname" required
-                                            class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                                            name="apellido" id="apellido" [value]="getUserId?.lastname"
-                                            placeholder="Edite el Apellido">
-                                        <p id=error_creater_id></p>
+                                    <div class="grid grid-cols-2">
+                                        <div class="mb-4 pr-2">
+                                            <label
+                                                class="block text-grey-darker text-sm font-bold mb-2">Teléfono:</label>
+                                            <input formControlName="phone" required
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker" type="number"
+                                                [value]="getUserId?.phone" placeholder="Edite Teléfono">
+
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label class="block text-grey-darker text-sm font-bold mb-2">Correo:</label>
+                                            <input formControlName="email" required
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker" type="email"
+                                                [value]="getUserId?.email" placeholder="Edite Correo">
+                                            <p id=error_creater_id></p>
+                                        </div>
+
                                     </div>
+
 
                                     <div class="mb-4">
                                         <label class="block text-grey-darker text-sm font-bold mb-2">Nombre de
@@ -321,3 +375,89 @@
             </div>
         </div>
     </div>
+
+
+    <!--MODAL VER CLIENTE-->
+    <div data-theme="light" class="modal-container">
+        <input type="checkbox" id="search-modal" [checked]="showClientModal" class="modal-toggle">
+        <div class="modal bg-opacity-50 bg-blacks">
+            <div class="modal-box p-0 pt-6 text-left">
+
+                <div class="w-full bg-grey-500">
+                    <div class="container mx-auto py-8">
+                        <div class="w-96 mx-auto bg-white rounded border border-green-500">
+
+                            <div class="container mx-auto my-4">
+                                <div>
+
+                                    <div class="bg-white relative w-11/12 mx-auto">
+                                        <!--<div class="flex justify-center">
+                                            <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-2xl border-4 border-white">
+                                    </div>-->
+
+                                        <div class="mt-4">
+                                            <h1 class="font-bold text-center text-3xl text-gray-900">{{getUserId?.name}}
+                                                {{getUserId?.lastname}}</h1>
+                                            <p *ngIf="getUserId?.rol ==='ROL_ADMIN'"
+                                                class="text-center text-sm text-gray-400 font-medium">
+                                                Usuario de tipo Administrador</p>
+                                            <p *ngIf="getUserId?.rol ==='ROL_CLIENTE'"
+                                                class="text-center text-sm text-gray-400 font-medium">
+                                                Usuario de Tipo Cliente</p>
+                                            <p>
+                                                <span>
+
+                                                </span>
+                                            </p>
+                                            <div class="my-5">
+                                                <a
+                                                    class="text-indigo-200 block text-center font-medium leading-6 px-6 py-3 bg-indigo-600">Usuario:
+                                                    <span class="font-bold">@{{getUserId?.username}}</span></a>
+                                            </div>
+                                            <div class="w-full">
+                                                <h3 class="font-bold text-gray-600 text-center px-4">Teléfono:
+                                                    {{getUserId?.phone}}</h3>
+                                                <h3 class="font-bold text-gray-600 text-center px-4">Correo:
+                                                    {{getUserId?.email}}</h3>
+                                                <div class="mt-5 w-full">
+
+                                                    <a
+                                                        class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+
+                                                        Added new profile picture
+                                                        <span class="text-gray-400 text-sm">42 min ago</span>
+                                                    </a>
+
+                                                    <a
+                                                        class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+                                                        Posted new article in <span class="font-bold">Web Dev</span>
+                                                        <span class="text-gray-400 text-sm">49 min ago</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+
+                                    <label (click)="showClientModal = false" for="search-modal"
+                                        class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
+                                    <button *ngIf="getUserId?.rol !=='ROL_ADMIN'"
+                                        class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Agregar Prestamo</button>
+                                </div>
+                                <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

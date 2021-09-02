@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-component1',
-  templateUrl: './component1.component.html',
-  styleUrls: ['./component1.component.scss']
+  selector: 'app-loan',
+  templateUrl: './loan.component.html',
+  styleUrls: ['./loan.component.scss']
 })
-export class Component1Component implements OnInit {
-
+export class LoanComponent implements OnInit {
   public step : number = 0;
   public loanForm = this.buildFormLoad();
   public typeForm : String = "";
@@ -63,5 +62,4 @@ export class Component1Component implements OnInit {
       this.step--
     }
   }
-
 }
