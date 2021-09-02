@@ -17,17 +17,13 @@ export class HomePageComponent implements OnInit {
       link: '/homePage/mainPage'
     },
     {
-      title: 'clientes',
+      title: 'Clientes',
       link: '/homePage/clients'
     },
     {
-      title: 'componente 1',
-      link: '/homePage/component1',
+      title: 'Prestamos',
+      link: '/homePage/loans',
       selected: true
-    },
-    {
-      title: 'componente 2',
-      link: '/homePage/component2'
     }
   ];
 

@@ -1,0 +1,158 @@
+<!-- component -->
+
+<div class="w-full flex justify-center">
+    <a (click)="showLoanModal = true" class="btn btn-primary ">Agregar Prestamo Cliente</a>
+</div>
+
+
+
+
+
+
+<div data-theme="light" class="modal-container">
+    <input type="checkbox" id="search-modal" [checked]="showLoanModal" class="modal-toggle">
+    <div class="modal bg-opacity-50 bg-blacks">
+        <div class="modal-box p-0 pt-6 text-left">
+
+            <div class="w-full bg-grey-500">
+                <div class="container mx-auto py-8">
+                    <div class="w-96 mx-auto bg-white rounded border border-green-500">
+                        <div class="p-5">
+                            <ul class="w-full steps">
+                                <li class="step step-info">Fly to moon</li>
+                                <li *ngIf="step === 0" class="step">Shrink the moon</li>
+                                <li *ngIf="step === 1" class="step step-info">Shrink the moon</li>
+                            </ul>
+                            <form class="mt-8 p-4" [formGroup]="loanForm" (ngSubmit)="checkForm()">
+                                <div *ngIf="step === 0" >
+
+                                    <div class="flex flex-col md:flex-row">
+                                        <div class="mb-4">
+                                            <label class="block text-grey-darker text-sm font-bold mb-2">Texto1:</label>
+                                            <input formControlName="name" required class=" border rounded w-full py-2 px-3 text-grey-darker"
+                                                type="text" name="student_id" id="student_id" value=""
+                                                placeholder="Ingresa el DPI">
+
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-grey-darker text-sm font-bold mb-2">Tipo de
+                                                Prestamo:</label>
+                                            <select formControlName="typeLoan" id="typeLoan" name="role"
+                                                class=" border rounded w-full py-2 px-3 text-grey-darker">
+                                                <option value="">-- Selecciona el Tipo --</option>
+                                                <option>Mobiliario</option>
+                                                <option>Vehículo</option>
+                                                <option>Joyeria</option>
+                                            </select>
+                                            <p id=error_creater_id></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="step === 1">
+
+                                    <div *ngIf="typeForm === 'Mobiliario'" class="flex flex-col md:flex-row">
+
+                                        <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                            <div
+                                                class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                Tamaño</div>
+                                            <div
+                                                class="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                                                <input placeholder="Tamaño"
+                                                    class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                            <div
+                                                class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                Marca</div>
+                                            <div
+                                                class="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                                                <input placeholder="Marca"
+                                                    class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="typeForm === 'Vehículo'" class="flex flex-col md:flex-row">
+
+                                        <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                            <div
+                                                class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                Marca</div>
+                                            <div
+                                                class="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                                                <input placeholder="Marca"
+                                                    class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                            <div
+                                                class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                Modelo</div>
+                                            <div
+                                                class="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                                                <input placeholder="Modelo"
+                                                    class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
+                                            </div>
+                                        </div>
+                                        <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                            <div
+                                                class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                Año</div>
+                                            <div
+                                                class="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                                                <input placeholder="Año"
+                                                    class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div *ngIf="typeForm === 'Joyeria'" class="flex flex-col md:flex-row">
+
+                                        <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                            <div
+                                                class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                Descripcion</div>
+                                            <div
+                                                class="bg-white my-2 p-1 flex border border-gray-200 rounded svelte-1l8159u">
+                                                <input placeholder="Descripcion"
+                                                    class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="flex p-2 mt-4">
+                                    <button *ngIf="step === 1" (click)=" previous()" class="text-base hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
+                                hover:bg-gray-200  
+                                bg-gray-100 
+                                text-gray-700 
+                                border duration-200 ease-in-out 
+                                border-gray-600 transition">Previous</button>
+                                    <div class="flex-auto flex flex-row-reverse">
+                                        <button type="submit" *ngIf="step === 0" class="text-base  ml-2  hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
+                                hover:bg-teal-600  
+                                bg-teal-600 
+                                text-teal-100 
+                                border duration-200 ease-in-out 
+                                border-teal-600 transition" (click)=" next(); checkForm()">Next</button>
+                                        <button class="text-base hover:scale-110 focus:outline-none flex justify-center px-4 py-2 rounded font-bold cursor-pointer 
+                                hover:bg-teal-200  
+                                bg-teal-100 
+                                text-teal-700 
+                                border duration-200 ease-in-out 
+                                border-teal-600 transition" (click)="showLoanModal = false; cancel()">Cancelar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

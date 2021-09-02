@@ -8,9 +8,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { ClientsComponent } from './components/clients/clients.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Component1Component } from './components/component1/component1.component';
-import { Component2Component } from './components/component2/component2.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { LoanComponent } from './components/loan/loan.component';
+import { LoansClientComponent } from './components/loans-client/loans-client.component';
 
 @NgModule({
   declarations: [
@@ -18,9 +18,9 @@ import { MainPageComponent } from './components/main-page/main-page.component';
     HomePageComponent,
     ClientsComponent,
     LoginComponent,
-    Component1Component,
-    Component2Component,
-    MainPageComponent
+    MainPageComponent,
+    LoanComponent,
+    LoansClientComponent
   ],
   imports: [
     BrowserModule,
