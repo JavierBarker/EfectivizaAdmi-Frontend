@@ -26,4 +26,10 @@ export class LoanService {
 
   }
 
+  addLoanClient(id: String, token: string, user: any):Observable<any>{
+    let params = JSON.stringify(user);
+    let headersToken = this.headersVar.set('Authorization', token);
+    return this.http.post(`${this.url}/createLoan/${id}`, params, {headers: headersToken} );
+
+  }
 }
