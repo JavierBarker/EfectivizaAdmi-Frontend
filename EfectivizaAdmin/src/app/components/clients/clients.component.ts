@@ -18,6 +18,8 @@ export class ClientsComponent implements OnInit {
   public getUserId: any;
   public formEditChanges: any = {};
 
+  public serchUsername: any;
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -192,6 +194,15 @@ export class ClientsComponent implements OnInit {
 
       }
     )
+  }
+
+  serchClientByUsername(){
+    this.userService.serchClient(this.clientForm.value.username).subscribe(
+      response=>{
+        this.getUserVar = response.foundUsers;
+      }
+    )
+    
   }
 
   showCreateModal: boolean = false;
