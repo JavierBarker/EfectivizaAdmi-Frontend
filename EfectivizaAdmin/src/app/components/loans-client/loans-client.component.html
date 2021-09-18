@@ -35,7 +35,8 @@
                                 d="M24 19v-7c0-.265-.105-.52-.293-.707-.187-.188-.442-.293-.707-.293h-22c-.265 0-.52.105-.707.293-.188.187-.293.442-.293.707v7h1v-2h22v2h1zm-1-6.5c0-.133-.053-.26-.146-.354-.094-.093-.221-.146-.354-.146h-21c-.133 0-.26.053-.354.146-.093.094-.146.221-.146.354v3.5h22v-3.5zm-20-2.5v-3.5c0-.276.224-.5.5-.5h17c.276 0 .5.224.5.5v3.5h1v-4c0-.265-.105-.52-.293-.707-.187-.188-.442-.293-.707-.293h-18c-.265 0-.52.105-.707.293-.188.187-.293.442-.293.707v4h1zm2 0h6v-2c0-.552-.448-1-1-1h-4c-.552 0-1 .448-1 1v2zm8 0h6v-2c0-.552-.448-1-1-1h-4c-.552 0-1 .448-1 1v2zm-3-1v-.6c0-.221-.179-.4-.4-.4h-3.2c-.221 0-.4.179-.4.4v.6h4zm8 0v-.6c0-.221-.179-.4-.4-.4h-3.2c-.221 0-.4.179-.4.4v.6h4z" />
                         </svg>
 
-                        <svg *ngIf="loans.typeLoan === 'Línea Blanca'" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" >
+                        <svg *ngIf="loans.typeLoan === 'Línea Blanca'" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M22 4v12h-20v-12h20zm2-2h-24v16h24v-16zm-17.836 5h5.673v1.418h-2.01v4.582h-1.653v-4.582h-2.01v-1.418zm9.961 0l-1.158 3.653-1.151-3.653h-1.701l1.942 6h1.792l1.986-6h-1.71zm-9.125 13c1 1.194 2.862 2 5 2s4-.806 5-2h-10z" />
                         </svg>
@@ -58,21 +59,53 @@
 
                     <div *ngIf="loans.canceled === false" class="alert alert-info">
                         <div class="flex-1 font-bold">
-                          <label>Estado de Cancelación: {{loans.canceled}}</label>
+                            <label>Estado de Cancelación: {{loans.canceled}}</label>
                         </div>
                     </div>
 
                     <div *ngIf="loans.canceled === true" class="alert alert-success">
                         <div class="flex-1 font-bold">
-                          <label>Estado de Cancelación: {{loans.canceled}}</label>
+                            <label>Estado de Cancelación: {{loans.canceled}}</label>
                         </div>
-                      </div>
+                    </div>
+                    <div class="py-3 px-6 text-center">
+                        <div class="flex item-center justify-center">
+                            <div (click)="getLoanModal = true; loanById(loans._id)"
+                                class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                            <div (click)="editLoanModal = true; loanById(loans._id)"
+                                class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                </svg>
+                            </div>
+                            <div (click)="deleteLoanModal = true; loanById(loans._id)"
+                                class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!--AGREGAR PRESTAMO-->
 <div data-theme="light" class="modal-container">
     <input type="checkbox" id="search-modal" [checked]="showLoanModal" class="modal-toggle">
     <div class="modal bg-opacity-50 bg-blacks">
@@ -324,6 +357,386 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MOSTRAR PRESTAMO-->
+<div data-theme="light" class="modal-container">
+    <input type="checkbox" id="search-modal" [checked]="getLoanModal" class="modal-toggle">
+    <div class="modal bg-opacity-50 bg-blacks">
+        <div class="modal-box p-0 pt-6 text-left">
+
+            <div class="w-full bg-grey-500">
+                <div class="container mx-auto py-8">
+                    <div class="w-96 mx-auto bg-white rounded border border-green-500">
+                        <div class="container mx-auto my-4">
+                            <div>
+
+                                <div class="bg-white relative w-11/12 mx-auto">
+                                    <!--<div class="flex justify-center">
+                                      <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-2xl border-4 border-white">
+                              </div>-->
+
+                                    <div class="mt-4">
+                                        <div class="my-5">
+                                            <a
+                                                class="text-indigo-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-indigo-600">Tipo:
+                                                {{getLoanById?.typeLoan}}
+                                                <span class="font-bold"></span></a>
+                                        </div>
+                                        <div class="w-full">
+                                            <h1 class="font-bold text-center text-3xl text-gray-900">
+                                                Descripción
+                                            </h1>
+                                            <p class="leading-relaxed text-base">Tipo: {{getLoanById?.description.type}}
+                                            </p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Modelo:
+                                                {{getLoanById?.description.mark}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Modelo:
+                                                {{getLoanById?.description.model}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Año:
+                                                {{getLoanById?.description.year}}</p>
+
+
+                                            <p *ngIf="getLoanById?.typeLoan != 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Descripción:
+                                                {{getLoanById?.description.description}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Inmobiliario'"
+                                                class="leading-relaxed text-base">Dirección:
+                                                {{getLoanById?.description.direction}}</p>
+                                            <div class="mt-5 w-full">
+
+                                                <a
+                                                    class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+
+                                                    Fecha del Prestamo:
+                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loanDate}}</span>
+                                                </a>
+
+                                                <a
+                                                    class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+                                                    Fecha de Pago:
+                                                    <span
+                                                        class="text-gray-400 text-sm">{{getLoanById?.paymentDate}}</span>
+                                                </a>
+                                            </div>
+                                            <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                                <div class=" flex item-center">
+                                                    <div class="w-1/2">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Abono</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.payment}}.00</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-1/2">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Monto</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.amount}}.00</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="mb-4">
+                                                    <label
+                                                        class="flex block text-grey-darker text-sm font-bold mb-2">Estado
+                                                        de
+                                                        Cancelación: <p class="pl-2 italic text-green-500">
+                                                            {{getLoanById?.canceled}}</p></label>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+
+                                <label (click)="getLoanModal = false" for="search-modal"
+                                    class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
+                            </div>
+                            <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--EDITAR PRESTAMO-->
+<div data-theme="light" class="modal-container">
+    <input type="checkbox" id="search-modal" [checked]="editLoanModal" class="modal-toggle">
+    <div class="modal bg-opacity-50 bg-blacks">
+        <div class="modal-box p-0 pt-6 text-left">
+
+            <div class="w-full bg-grey-500">
+                <div class="container mx-auto py-8">
+                    <div class="w-96 mx-auto bg-white rounded border border-green-500">
+                        <form [formGroup]="loanEditForm" class="container mx-auto my-4">
+                            <div>
+
+                                <div class="bg-white relative w-11/12 mx-auto">
+                                    <!--<div class="flex justify-center">
+                                      <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-2xl border-4 border-white">
+                              </div>-->
+
+                                    <div class="mt-4">
+                                        <div class="my-5">
+                                            <a
+                                                class="text-indigo-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-indigo-600">Tipo:
+                                                {{getLoanById?.typeLoan}}
+                                                <span class="font-bold"></span></a>
+                                        </div>
+                                        <div class="w-full">
+                                            <h1 class="font-bold text-center text-3xl text-gray-900">
+                                                Descripción
+                                            </h1>
+                                            <p class="leading-relaxed text-base">Tipo: {{getLoanById?.description.type}}
+                                            </p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Modelo:
+                                                {{getLoanById?.description.mark}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Modelo:
+                                                {{getLoanById?.description.model}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Año:
+                                                {{getLoanById?.description.year}}</p>
+
+
+                                            <p *ngIf="getLoanById?.typeLoan != 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Descripción:
+                                                {{getLoanById?.description.description}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Inmobiliario'"
+                                                class="leading-relaxed text-base">Dirección:
+                                                {{getLoanById?.description.direction}}</p>
+                                            <div class="mt-5 w-full">
+
+                                                <a
+                                                    class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+
+                                                    Fecha del Prestamo:
+                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loanDate}}</span>
+                                                </a>
+
+                                                <a
+                                                    class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+                                                    Fecha de Pago:
+                                                    <span
+                                                        class="text-gray-400 text-sm">{{getLoanById?.paymentDate}}</span>
+                                                </a>
+                                            </div>
+                                            <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                                <!--parte nueva-->
+                                                <div class=" flex item-center">
+                                                    <div class="w-1/2">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Abono</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q.</p>
+                                                            <div
+                                                                class="bg-white my-2 p-1 flex border border-gray-200 rounded items-center w-full">
+                                                                <input formControlName="payment" placeholder="Abono"
+                                                                    type="number" [value]="getLoanById?.payment"
+                                                                    class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-1/2 h-full item-center">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Monto</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.amount}}.00</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                    <label
+                                                        class="flex block text-grey-darker text-sm font-bold mb-2">Estado
+                                                        de
+                                                        Cancelación: <p class="pl-2 italic text-green-500">
+                                                            {{getLoanById?.canceled}}</p></label>
+                                                    <select formControlName="canceled" [value]="getLoanById?.canceled"
+                                                        class=" border rounded w-full py-2 px-3 text-grey-darker">
+                                                        <option>-- Estado de Cancelación --</option>
+                                                        <option>true</option>
+                                                        <option>false</option>
+                                                    </select>
+                                                    <p class="text-sm text-red-500 italic">Seleccione el estado de
+                                                        cancelación</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+
+                                <label (click)="editLoanModal = false" for="search-modal"
+                                    class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
+                                <button (click)="editLoan(getLoanById?._id)"
+                                    class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Editar
+                                    Prestamo</button>
+                            </div>
+                            <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--ELIMINAR PRESTAMO-->
+<div data-theme="light" class="modal-container">
+    <input type="checkbox" id="search-modal" [checked]="deleteLoanModal" class="modal-toggle">
+    <div class="modal bg-opacity-50 bg-blacks">
+        <div class="modal-box p-0 pt-6 text-left">
+
+            <div class="w-full bg-grey-500">
+                <div class="container mx-auto py-8">
+                    <div class="w-96 mx-auto bg-white rounded border border-green-500">
+                        <div class="container mx-auto my-4">
+                            <div>
+
+                                <div class="bg-white relative w-11/12 mx-auto">
+                                    <!--<div class="flex justify-center">
+                                      <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-2xl border-4 border-white">
+                              </div>-->
+
+                                    <div class="mt-4">
+                                        <div class="my-5">
+                                            <a
+                                                class="text-indigo-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-indigo-600">Tipo:
+                                                {{getLoanById?.typeLoan}}
+                                                <span class="font-bold"></span></a>
+                                        </div>
+                                        <div class="w-full">
+                                            <h1 class="font-bold text-center text-3xl text-gray-900">
+                                                Descripción
+                                            </h1>
+                                            <p class="leading-relaxed text-base">Tipo: {{getLoanById?.description.type}}
+                                            </p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Modelo:
+                                                {{getLoanById?.description.mark}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Modelo:
+                                                {{getLoanById?.description.model}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Año:
+                                                {{getLoanById?.description.year}}</p>
+
+
+                                            <p *ngIf="getLoanById?.typeLoan != 'Vehículo'"
+                                                class="leading-relaxed text-base">
+                                                Descripción:
+                                                {{getLoanById?.description.description}}</p>
+                                            <p *ngIf="getLoanById?.typeLoan === 'Inmobiliario'"
+                                                class="leading-relaxed text-base">Dirección:
+                                                {{getLoanById?.description.direction}}</p>
+                                            <div class="mt-5 w-full">
+
+                                                <a
+                                                    class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+
+                                                    Fecha del Prestamo:
+                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loanDate}}</span>
+                                                </a>
+
+                                                <a
+                                                    class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+                                                    Fecha de Pago:
+                                                    <span
+                                                        class="text-gray-400 text-sm">{{getLoanById?.paymentDate}}</span>
+                                                </a>
+                                            </div>
+                                            <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                                <div class=" flex item-center">
+                                                    <div class="w-1/2">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Abono</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.payment}}.00</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-1/2">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Monto</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.amount}}.00</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="mb-4">
+                                                    <label
+                                                        class="flex block text-grey-darker text-sm font-bold mb-2">Estado
+                                                        de
+                                                        Cancelación: <p class="pl-2 italic text-green-500">
+                                                            {{getLoanById?.canceled}}</p></label>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+
+                                <label (click)="deleteLoanModal = false" for="search-modal"
+                                    class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
+                                <button (click)="deleteLoan(getLoanById?._id)"
+                                    class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Eliminar
+                                    Prestamo</button>
+                            </div>
+                            <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+                            </div>
+
                         </div>
                     </div>
                 </div>

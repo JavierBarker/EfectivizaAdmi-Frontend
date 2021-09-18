@@ -1,11 +1,11 @@
 <div class="overflow-x-auto bg-gray-100 ">
     <div class="mx-auto flex justify-between w-5/6">
         <a (click)="showCreateModal = true" class="btn btn-primary ">agregar cliente</a>
-        <a (click)="getUser()" class="btn btn-primary ">recargar</a>
+        <a (click)="getUser()" class="btn btn-primary ">mostrar todos</a>
         <form [formGroup]="clientForm"class="flex items-center">
             <div class="flex-1 lg:flex-none">
                 <div class="form-control">
-                    <input formControlName="username" type="text" placeholder="Search" class="border rounded w-full py-2 px-3 text-grey-darker">
+                    <input formControlName="username" type="text" placeholder="Search" class="border rounded w-full py-2 px-3 text-grey-darker" value="">
                 </div>
             </div>
             <div class="flex-none">

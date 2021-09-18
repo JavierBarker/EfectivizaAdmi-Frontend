@@ -32,4 +32,19 @@ export class LoanService {
     return this.http.post(`${this.url}/createLoan/${id}`, params, {headers: headersToken} );
 
   }
+
+  editLoan(id: string, token: string,  user: any):Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', token);
+    return this.http.put(`${this.url}/editLoan/${id}`,user, {headers: headersToken});
+  }
+
+  getLoanById(id: string, token):Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', token);
+    return this.http.get(`${this.url}/getLoanById/${id}`, {headers: headersToken});
+  }
+
+  deleteLoanById(id: string, token: any):Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', token);
+    return this.http.delete(`${this.url}/deleteLoanById/${id}`, {headers: headersToken});
+  }
 }

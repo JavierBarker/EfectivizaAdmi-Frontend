@@ -14,11 +14,14 @@ import Swal from 'sweetalert2'
 export class LoansClientComponent implements OnInit {
   public step: number = 0;
   public loanForm = this.buildFormLoad();
+  public loanEditForm = this.editFormLoan();
+  public formEditLoan: any = {};
   public typeForm: String = "";
   public idClient: any = "";
   public token: any = "";
   public dateToday: any;
   loansRequest: any;
+  getLoanById: any;
   minDate: Date;
 
   constructor(private fmBuilder: FormBuilder,
@@ -27,11 +30,6 @@ export class LoansClientComponent implements OnInit {
     private activatedRoute: ActivatedRoute) {
 
     this.token = this.userService.getToken();
-
-
-
-    
-
 
   }
 
@@ -42,10 +40,16 @@ export class LoansClientComponent implements OnInit {
     })
 
     this.getLoansClient();
-    console.log(this.loansRequest);
 
     const yesterdayDays = new Date(Date.now());
     this.minDate = new Date(yesterdayDays)
+
+    this.loanEditForm.valueChanges.subscribe(
+      value=>{
+        if(value.payment !== this.getLoanById.payment) this.formEditLoan.payment = value.payment;
+        if(value.canceled !== this.getLoanById.canceled) this.formEditLoan.canceled = value.canceled;
+      }
+    )
   }
 
   buildFormLoad() {
@@ -62,6 +66,13 @@ export class LoansClientComponent implements OnInit {
         type: ['']
       }),
       typeLoan: ['', Validators.required]
+    })
+  }
+
+  editFormLoan(){
+    return this.fmBuilder.group({
+      payment: [0, Validators.required],
+      canceled: [Boolean, Validators.required]
     })
   }
   
@@ -99,6 +110,78 @@ export class LoansClientComponent implements OnInit {
 
     
     
+  }
+
+  loanById(id: string){
+    this.loanService.getLoanById(id, this.token).subscribe(
+      response=>{
+        this.getLoanById = response.foundLoan;
+      }
+    )
+  }
+
+  editLoan(id: string){
+    if (this.formEditLoan.payment.length === 0) {
+      delete this.formEditLoan.payment;
+    }
+    if (this.formEditLoan.canceled.length === 0) {
+      delete this.formEditLoan.canceled;
+    }
+    this.loanService.editLoan(id, this.token, this.formEditLoan).subscribe(
+      response=>{
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Prestamo Editado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+        this.getLoansClient();
+        this.editLoanModal = false;
+      },
+      error=>{
+
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'No se pudo Editar el Prestamo',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+      }
+    )
+  }
+
+  deleteLoan(id: string){
+    this.loanService.deleteLoanById(id, this.token).subscribe(
+      response=>{
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Prestamo Eliminado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.deleteLoanModal = false;
+        this.getLoansClient();
+
+
+      },
+      error=>{
+        console.log(<any>error);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'No se pudo Eliminar el Prestamo',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+      }
+
+    )
   }
 
   next() {
@@ -143,4 +226,7 @@ export class LoansClientComponent implements OnInit {
 
 
   showLoanModal: boolean = false;
+  getLoanModal: boolean = false;
+  editLoanModal: boolean = false;
+  deleteLoanModal: boolean = false;
 }
