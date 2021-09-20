@@ -63,6 +63,11 @@ export class UserService {
   }
 
 
+  serchClient(user: any):Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', this.getToken());
+    return this.http.get(`${this.url}/serchClientByUsername/${user}`, {headers: headersToken} );
+  }
+
   getIdentity(){
     var identidty2 = JSON.parse(localStorage.getItem('identity'));
     if(identidty2 != 'undefined'){
