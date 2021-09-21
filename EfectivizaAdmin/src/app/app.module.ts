@@ -9,13 +9,13 @@ import { ClientsComponent } from './components/clients/clients.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainPageComponent } from './components/main-page/main-page.component';
-import { LoanComponent } from './components/loan/loan.component';
 import { LoansClientComponent } from './components/loans-client/loans-client.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ContactComponent } from './components/contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ClientsComponent,
     LoginComponent,
     MainPageComponent,
-    LoanComponent,
-    LoansClientComponent
+    LoansClientComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,

@@ -118,7 +118,7 @@
                             <ul class="w-full steps">
                                 <li class="step step-info">Paso 1</li>
                                 <li *ngIf="step === 0" class="step">Paso 2</li>
-                                <li *ngIf="step === 1" class="step step-info">Shrink the moon</li>
+                                <li *ngIf="step === 1" class="step step-info">Paso 2</li>
                             </ul>
                             <form class="mt-8 p-4" [formGroup]="loanForm">
                                 <div *ngIf="step === 0">
@@ -385,7 +385,7 @@
                                     <div class="mt-4">
                                         <div class="my-5">
                                             <a
-                                                class="text-indigo-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-indigo-600">Tipo:
+                                                class="text-gray-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-green-500">Tipo:
                                                 {{getLoanById?.typeLoan}}
                                                 <span class="font-bold"></span></a>
                                         </div>
@@ -511,7 +511,7 @@
                                     <div class="mt-4">
                                         <div class="my-5">
                                             <a
-                                                class="text-indigo-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-indigo-600">Tipo:
+                                                class="text-gray-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-green-500">Tipo:
                                                 {{getLoanById?.typeLoan}}
                                                 <span class="font-bold"></span></a>
                                         </div>
@@ -583,14 +583,6 @@
                                                             <p class="pr-2 text-2xl">Q. {{getLoanById?.amount}}.00</p>
                                                         </div>
                                                     </div>
-                                                    <div class="w-1/2 h-full item-center">
-                                                        <div
-                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
-                                                            Monto</div>
-                                                        <div class="flex items-center w-full">
-                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.amount}}.00</p>
-                                                        </div>
-                                                    </div>
                                                 </div>
 
                                                 <div class="mb-4">
@@ -617,7 +609,7 @@
 
                             <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
 
-                                <label (click)="editLoanModal = false" for="search-modal"
+                                <label (click)="resetForm(); editLoanModal = false" for="search-modal"
                                     class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
                                 <button (click)="editLoan(getLoanById?._id)"
                                     class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Editar
@@ -654,7 +646,7 @@
                                     <div class="mt-4">
                                         <div class="my-5">
                                             <a
-                                                class="text-indigo-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-indigo-600">Tipo:
+                                                class="text-gray-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-green-500">Tipo:
                                                 {{getLoanById?.typeLoan}}
                                                 <span class="font-bold"></span></a>
                                         </div>

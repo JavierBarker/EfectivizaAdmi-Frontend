@@ -230,7 +230,9 @@ export class LoansClientComponent implements OnInit {
   editLoanModal: boolean = false;
   deleteLoanModal: boolean = false;
 
+
   resetForm(){
     this.loanForm.reset();
+    this.loanEditForm.reset();
   }
 }
