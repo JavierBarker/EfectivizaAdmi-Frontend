@@ -221,7 +221,7 @@
 
                                 <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
 
-                                    <label (click)="showCreateModal = false" for="search-modal"
+                                    <label (click)="resetForm(); showCreateModal = false" for="search-modal"
                                         class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
                                     <button for="search-modal" type="submit"
                                         class="btn-modal-close btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Agregar</button>
@@ -266,7 +266,7 @@
                                         <label class="block text-grey-darker text-sm font-bold mb-2">DPI:</label>
                                         <input formControlName="dpi" required
                                             class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                                            name="student_id" id="student_id" [value]="getUserId?.dpi"
+                                            name="student_id" [value]="getUserId?.dpi"
                                             placeholder="Edite el DPI">
 
                                     </div>
@@ -276,7 +276,7 @@
                                             <label class="block text-grey-darker text-sm font-bold mb-2">Nombre:</label>
                                             <input formControlName="name" required
                                                 class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                                                name="nombre" id="nombre" [value]="getUserId?.name"
+                                                name="nombre" [value]="getUserId?.name"
                                                 placeholder="Edite el Nombre">
 
                                         </div>
@@ -286,7 +286,7 @@
                                                 class="block text-grey-darker text-sm font-bold mb-2">Apellido:</label>
                                             <input formControlName="lastname" required
                                                 class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                                                name="apellido" id="apellido" [value]="getUserId?.lastname"
+                                                name="apellido" [value]="getUserId?.lastname"
                                                 placeholder="Edite el Apellido">
                                             <p id=error_creater_id></p>
                                         </div>
@@ -319,7 +319,7 @@
                                             Usuario:</label>
                                         <input formControlName="username" required
                                             class=" border rounded w-full py-2 px-3 text-grey-darker" type="text"
-                                            name="usuario" id="usuario" [value]="getUserId?.username"
+                                            name="usuario" [value]="getUserId?.username"
                                             placeholder="Edite el Nombre de Usuario">
                                         <p id=error_creater_id></p>
                                     </div>

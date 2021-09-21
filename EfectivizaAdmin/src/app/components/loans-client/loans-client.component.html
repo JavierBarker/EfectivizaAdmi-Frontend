@@ -142,7 +142,7 @@
                                                     <p class="text-2xl mr-2">Q.</p>
                                                     <input required formControlName="amount"
                                                         class=" border rounded w-full py-2 px-3 text-grey-darker"
-                                                        type="text" name="monto" id="monto" placeholder="0000.00">
+                                                        type="number" name="monto" id="monto" placeholder="0000.00">
                                                 </div>
 
                                             </div>
@@ -353,7 +353,7 @@
                                 bg-teal-100
                                 text-teal-700
                                 border duration-200 ease-in-out
-                                border-teal-600 transition" (click)="showLoanModal = false; cancel()">Cancelar</button>
+                                border-teal-600 transition" (click)="resetForm(); showLoanModal = false; cancel()">Cancelar</button>
                                     </div>
                                 </div>
                             </form>
@@ -422,14 +422,14 @@
                                                     class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
 
                                                     Fecha del Prestamo:
-                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loanDate}}</span>
+                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loanDate | date:'shortDate'}}</span>
                                                 </a>
 
                                                 <a
                                                     class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
                                                     Fecha de Pago:
                                                     <span
-                                                        class="text-gray-400 text-sm">{{getLoanById?.paymentDate}}</span>
+                                                        class="text-gray-400 text-sm">{{getLoanById?.paymentDate | date:'shortDate'}}</span>
                                                 </a>
                                             </div>
                                             <div class="w-full flex-1 mx-2 svelte-1l8159u">

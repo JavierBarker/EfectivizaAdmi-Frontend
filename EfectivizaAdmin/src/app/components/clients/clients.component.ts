@@ -210,5 +210,7 @@ export class ClientsComponent implements OnInit {
   showDeleteModal: boolean = false;
   showClientModal: boolean = false;
 
-
+  resetForm(){
+    this.clientForm.reset();
+  }
 }
