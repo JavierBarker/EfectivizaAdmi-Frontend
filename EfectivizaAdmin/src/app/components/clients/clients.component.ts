@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoanService } from 'src/app/services/loan.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2'
 @Component({
@@ -202,7 +203,7 @@ export class ClientsComponent implements OnInit {
         this.getUserVar = response.foundUsers;
       }
     )
-    
+
   }
 
   showCreateModal: boolean = false;

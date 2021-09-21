@@ -432,26 +432,13 @@
                                                     class="text-indigo-200 block text-center font-medium leading-6 px-6 py-3 bg-indigo-600">Usuario:
                                                     <span class="font-bold">@{{getUserId?.username}}</span></a>
                                             </div>
-                                            <div class="w-full">
+                                            <div class="w-full mt-6">
+                                              <h3 class="font-bold text-gray-600 text-center px-4">DPI:
+                                                {{getUserId?.dpi}}</h3>
                                                 <h3 class="font-bold text-gray-600 text-center px-4">Teléfono:
                                                     {{getUserId?.phone}}</h3>
                                                 <h3 class="font-bold text-gray-600 text-center px-4">Correo:
                                                     {{getUserId?.email}}</h3>
-                                                <div class="mt-5 w-full">
-
-                                                    <a
-                                                        class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
-
-                                                        Added new profile picture
-                                                        <span class="text-gray-400 text-sm">42 min ago</span>
-                                                    </a>
-
-                                                    <a
-                                                        class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
-                                                        Posted new article in <span class="font-bold">Web Dev</span>
-                                                        <span class="text-gray-400 text-sm">49 min ago</span>
-                                                    </a>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -464,8 +451,8 @@
                                         class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
                                     <button *ngIf="getUserId?.rol !=='ROL_ADMIN'"
                                         class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium"
-                                        [routerLink]="['/homePage/loansClient', getUserId?._id]">Agregar
-                                        Prestamo</button>
+                                        [routerLink]="['/homePage/loansClient', getUserId?._id]">Ver
+                                        Prestamos</button>
                                 </div>
                                 <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
                                 </div>

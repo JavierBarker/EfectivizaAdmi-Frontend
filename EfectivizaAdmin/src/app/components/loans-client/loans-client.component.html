@@ -59,13 +59,13 @@
 
                     <div *ngIf="loans.canceled === false" class="alert alert-info">
                         <div class="flex-1 font-bold">
-                            <label>Estado de Cancelación: {{loans.canceled}}</label>
+                            <label>Estado de Cancelación: Sin Cancelar</label>
                         </div>
                     </div>
 
                     <div *ngIf="loans.canceled === true" class="alert alert-success">
                         <div class="flex-1 font-bold">
-                            <label>Estado de Cancelación: {{loans.canceled}}</label>
+                            <label>Estado de Cancelación: Cancelado</label>
                         </div>
                     </div>
                     <div class="py-3 px-6 text-center">
@@ -455,11 +455,16 @@
 
 
                                                 <div class="mb-4">
-                                                    <label
+                                                    <label *ngIf="getLoanById?.canceled === false"
                                                         class="flex block text-grey-darker text-sm font-bold mb-2">Estado
                                                         de
                                                         Cancelación: <p class="pl-2 italic text-green-500">
-                                                            {{getLoanById?.canceled}}</p></label>
+                                                            Sin Cancelar</p></label>
+                                                            <label *ngIf="getLoanById?.canceled === true"
+                                                        class="flex block text-grey-darker text-sm font-bold mb-2">Estado
+                                                        de
+                                                        Cancelación: <p class="pl-2 italic text-green-500">
+                                                            Cancelado</p></label>
                                                 </div>
 
 
@@ -543,14 +548,14 @@
                                                     class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
 
                                                     Fecha del Prestamo:
-                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loanDate}}</span>
+                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loanDate | date:'shortDate'}}</span>
                                                 </a>
 
                                                 <a
                                                     class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
                                                     Fecha de Pago:
                                                     <span
-                                                        class="text-gray-400 text-sm">{{getLoanById?.paymentDate}}</span>
+                                                        class="text-gray-400 text-sm">{{getLoanById?.paymentDate | date:'shortDate'}}</span>
                                                 </a>
                                             </div>
                                             <div class="w-full flex-1 mx-2 svelte-1l8159u">
@@ -568,6 +573,14 @@
                                                                     type="number" [value]="getLoanById?.payment"
                                                                     class="p-1 px-2 appearance-none outline-none w-full text-gray-800">
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-1/2 h-full item-center">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Monto</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.amount}}.00</p>
                                                         </div>
                                                     </div>
                                                     <div class="w-1/2 h-full item-center">
@@ -711,12 +724,20 @@
 
 
                                                 <div class="mb-4">
-                                                    <label
+                                                    <label *ngIf="getLoanById?.canceled === true"
                                                         class="flex block text-grey-darker text-sm font-bold mb-2">Estado
                                                         de
                                                         Cancelación: <p class="pl-2 italic text-green-500">
-                                                            {{getLoanById?.canceled}}</p></label>
+                                                            Cancelado</p></label>
+
+                                                            <label *ngIf="getLoanById?.canceled === false"
+                                                            class="flex block text-grey-darker text-sm font-bold mb-2">Estado
+                                                            de
+                                                            Cancelación: <p class="pl-2 italic text-green-500">
+                                                                Sin Cancelar</p></label>
                                                 </div>
+
+
 
 
                                             </div>

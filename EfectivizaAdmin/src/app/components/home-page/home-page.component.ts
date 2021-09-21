@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class HomePageComponent implements OnInit {
 
   userLogged: any;
+  showProfileModal: boolean = false;
 
   MenuItemAdmin= [
     {
