@@ -427,8 +427,10 @@
                                                 {{getUserId?.dpi}}</h3>
                                                 <h3 class="font-bold text-gray-600 text-center px-4">Teléfono:
                                                     {{getUserId?.phone}}</h3>
-                                                <h3 class="font-bold text-gray-600 text-center px-4">Correo:
+                                                <h3 *ngIf="getUserId?.email" class="font-bold text-gray-600 text-center px-4">Correo:
                                                     {{getUserId?.email}}</h3>
+                                                <h3 *ngIf="!getUserId?.email" class="font-bold text-gray-600 text-center px-4">Correo:
+                                                    Correo no registrado</h3>
                                             </div>
                                         </div>
                                     </div>

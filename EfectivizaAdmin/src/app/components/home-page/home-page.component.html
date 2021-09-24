@@ -53,8 +53,10 @@
                                               {{userLogged.dpi}}</h3>
                                               <h3 class="font-bold text-gray-600 text-center px-4">Teléfono:
                                                   {{userLogged.phone}}</h3>
-                                              <h3 class="font-bold text-gray-600 text-center px-4">Correo:
+                                              <h3 *ngIf="userLogged.email" class="font-bold text-gray-600 text-center px-4">Correo:
                                                   {{userLogged.email}}</h3>
+                                                  <h3 *ngIf="!userLogged.email" class="font-bold text-gray-600 text-center px-4">Correo:
+                                                    Correo no registrado</h3>
                                               <div class="mt-5 w-full">
 
                                                   <a *ngIf="userLogged.rol !== 'ROL_ADMIN'"
@@ -129,7 +131,7 @@
             {{userLogged?.name}} {{userLogged?.lastname}}
           </div>
         </div>
-        <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-green-600 rounded-box w-52">
+        <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-green-500 rounded-box w-52">
           <li (click)="showProfileModal = true">
             <a>Tu usuario</a>
           </li>
