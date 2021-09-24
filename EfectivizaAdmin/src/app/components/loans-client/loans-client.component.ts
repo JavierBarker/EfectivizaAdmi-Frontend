@@ -75,7 +75,7 @@ export class LoansClientComponent implements OnInit {
       canceled: [Boolean, Validators.required]
     })
   }
-  
+
   getLoansClient(){
     this.loanService.getLoansClient(this.idClient, this.token).subscribe(data => { this.loansRequest = data })
   }
@@ -108,8 +108,8 @@ export class LoansClientComponent implements OnInit {
       }
     )
 
-    
-    
+
+
   }
 
   loanById(id: string){
@@ -229,8 +229,10 @@ export class LoansClientComponent implements OnInit {
   getLoanModal: boolean = false;
   editLoanModal: boolean = false;
   deleteLoanModal: boolean = false;
-  
+
+
   resetForm(){
     this.loanForm.reset();
+    this.loanEditForm.reset();
   }
 }

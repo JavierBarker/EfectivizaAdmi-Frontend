@@ -10,6 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class HomePageComponent implements OnInit {
 
   userLogged: any;
+  showProfileModal: boolean = false;
 
   MenuItemAdmin= [
     {
@@ -21,25 +22,19 @@ export class HomePageComponent implements OnInit {
       link: '/homePage/clients'
     },
     {
-      title: 'Prestamos',
-      link: '/homePage/loans',
-      selected: true
+      title: 'Contactos',
+      link: '/homePage/contact'
     }
   ];
 
   MenuItemClient= [
     {
       title: 'Principal',
-      link: '/homePage/mainPage'
+      link: '/homePage/mainPage',
     },
     {
-      title: 'componente 1',
-      link: '/homePage/component1',
-      selected: true
-    },
-    {
-      title: 'componente 2',
-      link: '/homePage/component2'
+      title: 'Contactos',
+      link: '/homePage/contact'
     }
   ];
 

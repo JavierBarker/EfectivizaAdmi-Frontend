@@ -11,10 +11,98 @@
         </ul>
     </div>-->
 
-    <div class="navbar mb-2 shadow-lg bg-green-400 text-neutral-content rounded-box mx-3 mt-3">
+     <!--MODAL VER CLIENTE-->
+     <div data-theme="light" class="modal-container">
+      <input type="checkbox" id="search-modal" [checked]="showProfileModal" class="modal-toggle">
+      <div class="modal bg-opacity-50 bg-blacks">
+          <div class="modal-box p-0 pt-6 text-left">
+
+              <div class="w-full bg-grey-500">
+                  <div class="container mx-auto py-8">
+                      <div class="w-96 mx-auto bg-white rounded border border-green-500">
+
+                          <div class="container mx-auto my-4">
+                              <div>
+
+                                  <div class="bg-white relative w-11/12 mx-auto">
+                                      <!--<div class="flex justify-center">
+                                        <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-2xl border-4 border-white">
+                                </div>-->
+
+                                      <div class="mt-4">
+                                          <h1 class="font-bold text-center text-3xl text-gray-900">{{userLogged?.name}}
+                                              {{userLogged?.lastname}}</h1>
+                                          <p *ngIf="userLogged?.rol ==='ROL_ADMIN'"
+                                              class="text-center text-sm text-gray-400 font-medium">
+                                              Usuario de tipo Administrador</p>
+                                          <p *ngIf="userLogged?.rol ==='ROL_CLIENTE'"
+                                              class="text-center text-sm text-gray-400 font-medium">
+                                              Usuario de Tipo Cliente</p>
+                                          <p>
+                                              <span>
+
+                                              </span>
+                                          </p>
+                                          <div class="my-5">
+                                              <a
+                                                  class="text-gray-200 block text-center font-medium leading-6 px-6 py-3 bg-green-500">Usuario:
+                                                  <span class="font-bold">{{userLogged.username}}</span></a>
+                                          </div>
+                                          <div class="w-full">
+                                            <h3 class="font-bold text-gray-600 text-center px-4">DPI:
+                                              {{userLogged.dpi}}</h3>
+                                              <h3 class="font-bold text-gray-600 text-center px-4">Teléfono:
+                                                  {{userLogged.phone}}</h3>
+                                              <h3 *ngIf="userLogged.email" class="font-bold text-gray-600 text-center px-4">Correo:
+                                                  {{userLogged.email}}</h3>
+                                                  <h3 *ngIf="!userLogged.email" class="font-bold text-gray-600 text-center px-4">Correo:
+                                                    Correo no registrado</h3>
+                                              <div class="mt-5 w-full">
+
+                                                  <a *ngIf="userLogged.rol !== 'ROL_ADMIN'"
+                                                      class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+
+                                                      Si existe algún error con sus datos comunicar con el equipo de Efectiviza
+
+                                                  </a>
+
+                                                  <a *ngIf="userLogged.rol === 'ROL_ADMIN'"
+                                                      class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+
+                                                      Si existe algún error con sus datos comunicar con Soporte Técnico de Efectiviza
+
+                                                  </a>
+
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </div>
+
+                              <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+
+                                  <label (click)="showProfileModal = false" for="search-modal"
+                                      class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
+                              </div>
+                              <div class="modal-action  rounded-b-2xl px-5 mt-2 pb-5">
+                              </div>
+
+                          </div>
+
+                      </div>
+                  </div>
+
+
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <div class="navbar mb-2 shadow-lg bg-green-400 text-neutral-content">
       <div class="flex-none px-2 mx-2">
         <span class="text-lg font-bold">
-                Efectiviza
+                <img src="../../../assets/Efectiviza-Logo-01.png" class="img-responsive h-14">
               </span>
       </div>
       <div *ngIf="userLogged.rol ==='ROL_ADMIN'" class="flex-1 px-2 mx-2">
@@ -34,19 +122,21 @@
     </div>
 
       <div class="dropdown dropdown-left">
-        <div tabindex="0" class="m-1 btn">
-          <div class="avatar">
+        <div tabindex="0" class="m-1 btn bg-green-500 border-none hover:bg-green-600">
+          <div class="avatar items-center text-gray-200">
             <div class="rounded-full w-10 h-10 m-1">
-              <img src="https://i.pravatar.cc/500?img=32">
+              <img src="../../../assets/User.png">
+
             </div>
+            {{userLogged?.name}} {{userLogged?.lastname}}
           </div>
         </div>
-        <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-neutral rounded-box w-52">
-          <li>
+        <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-green-500 rounded-box w-52">
+          <li (click)="showProfileModal = true">
             <a>Tu usuario</a>
           </li>
           <li (click)="logOut()">
-            <a>Log Out</a>
+            <a>Cerrar Sesión</a>
           </li>
         </ul>
       </div>
