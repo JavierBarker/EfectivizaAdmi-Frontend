@@ -1,1 +1,382 @@
-<p>main-page works!</p>
+<div *ngIf="userLogged.rol ==='ROL_ADMIN'" class="pb-4">
+  <h1 class="text-black pt-2 text-center">Todos los préstamos</h1>
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-2 mx-auto">
+        <div class="flex flex-wrap -m-4">
+            <div *ngFor="let loans of loansNormal" class="xl:w-1/3 md:w-1/2 p-4">
+                <div class="border border-gray-200 p-6 rounded-lg bg-gray-100">
+                    <div
+                        class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                        <svg *ngIf="loans.typeLoan === 'Vehículo'" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M23.5 7c.276 0 .5.224.5.5v.511c0 .793-.926.989-1.616.989l-1.086-2h2.202zm-1.441 3.506c.639 1.186.946 2.252.946 3.666 0 1.37-.397 2.533-1.005 3.981v1.847c0 .552-.448 1-1 1h-1.5c-.552 0-1-.448-1-1v-1h-13v1c0 .552-.448 1-1 1h-1.5c-.552 0-1-.448-1-1v-1.847c-.608-1.448-1.005-2.611-1.005-3.981 0-1.414.307-2.48.946-3.666.829-1.537 1.851-3.453 2.93-5.252.828-1.382 1.262-1.707 2.278-1.889 1.532-.275 2.918-.365 4.851-.365s3.319.09 4.851.365c1.016.182 1.45.507 2.278 1.889 1.079 1.799 2.101 3.715 2.93 5.252zm-16.059 2.994c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5.672 1.5 1.5 1.5 1.5-.672 1.5-1.5zm10 1c0-.276-.224-.5-.5-.5h-7c-.276 0-.5.224-.5.5s.224.5.5.5h7c.276 0 .5-.224.5-.5zm2.941-5.527s-.74-1.826-1.631-3.142c-.202-.298-.515-.502-.869-.566-1.511-.272-2.835-.359-4.441-.359s-2.93.087-4.441.359c-.354.063-.667.267-.869.566-.891 1.315-1.631 3.142-1.631 3.142 1.64.313 4.309.497 6.941.497s5.301-.184 6.941-.497zm2.059 4.527c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5.672 1.5 1.5 1.5 1.5-.672 1.5-1.5zm-18.298-6.5h-2.202c-.276 0-.5.224-.5.5v.511c0 .793.926.989 1.616.989l1.086-2z" />
+                        </svg>
+                        <svg *ngIf="loans.typeLoan === 'Inmobiliario'" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6"
+                            viewBox="0 0 24 24">
+                            <path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z" />
+                        </svg>
+                        <svg *ngIf="loans.typeLoan === 'Joyería'" xmlns="http://www.w3.org/2000/svg"
+                            stroke="currentColor" stroke-linecap="round" fill="currentColor" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M7.388 9h9.225l-4.613 14-4.612-14zm.612-2h8l-4-5.333-4 5.333zm10.5 0h5.5l-6-6h-4l4.5 6zm-13 0l4.5-6h-3.916l-6.084 6h5.5zm-5.5 2l9.234 12-3.955-12h-5.279zm18.721 0l-3.924 12 9.203-12h-5.279z" />
+                        </svg>
+
+                        <svg *ngIf="loans.typeLoan === 'Mobiliario'" width="24" height="24"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" clip-rule="evenodd">
+                            <path
+                                d="M24 19v-7c0-.265-.105-.52-.293-.707-.187-.188-.442-.293-.707-.293h-22c-.265 0-.52.105-.707.293-.188.187-.293.442-.293.707v7h1v-2h22v2h1zm-1-6.5c0-.133-.053-.26-.146-.354-.094-.093-.221-.146-.354-.146h-21c-.133 0-.26.053-.354.146-.093.094-.146.221-.146.354v3.5h22v-3.5zm-20-2.5v-3.5c0-.276.224-.5.5-.5h17c.276 0 .5.224.5.5v3.5h1v-4c0-.265-.105-.52-.293-.707-.187-.188-.442-.293-.707-.293h-18c-.265 0-.52.105-.707.293-.188.187-.293.442-.293.707v4h1zm2 0h6v-2c0-.552-.448-1-1-1h-4c-.552 0-1 .448-1 1v2zm8 0h6v-2c0-.552-.448-1-1-1h-4c-.552 0-1 .448-1 1v2zm-3-1v-.6c0-.221-.179-.4-.4-.4h-3.2c-.221 0-.4.179-.4.4v.6h4zm8 0v-.6c0-.221-.179-.4-.4-.4h-3.2c-.221 0-.4.179-.4.4v.6h4z" />
+                        </svg>
+
+                        <!--<svg *ngIf="loans.typeLoan === 'Línea Blanca'" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M6.14,0H65.4c1.69,0,3.23,0.69,4.34,1.8c1.11,1.11,1.8,2.65,1.8,4.34v29.67v73.73c0,1.69-0.69,3.23-1.8,4.34 c-1.11,1.11-2.65,1.8-4.34,1.8h-4.89v2.72c0,2.47-2.02,4.49-4.49,4.49l0,0c-2.47,0-4.49-2.02-4.49-4.49v-2.72H20.17v2.72 c0,2.47-2.02,4.49-4.49,4.49l0,0c-2.47,0-4.49-2.02-4.49-4.49v-2.72H6.14c-1.69,0-3.23-0.69-4.34-1.8c-1.11-1.11-1.8-2.65-1.8-4.34 V35.81V6.14C0,4.45,0.69,2.91,1.8,1.8C2.91,0.69,4.45,0,6.14,0L6.14,0z M10.2,44.89c0-1.34,1.09-2.43,2.43-2.43 c1.34,0,2.43,1.09,2.43,2.43v20.4c0,1.34-1.09,2.43-2.43,2.43c-1.34,0-2.43-1.09-2.43-2.43V44.89L10.2,44.89z M10.2,10.39 c0-1.34,1.09-2.43,2.43-2.43c1.34,0,2.43,1.09,2.43,2.43v15.15c0,1.34-1.09,2.43-2.43,2.43c-1.34,0-2.43-1.09-2.43-2.43V10.39 L10.2,10.39z M4.87,33.37h61.81V6.14c0-0.35-0.14-0.67-0.38-0.9c-0.23-0.23-0.55-0.38-0.9-0.38H6.14c-0.35,0-0.67,0.14-0.9,0.38 c-0.23,0.23-0.38,0.55-0.38,0.9V33.37L4.87,33.37z M66.67,38.24H4.87v71.29c0,0.35,0.14,0.67,0.38,0.9 c0.23,0.23,0.55,0.38,0.9,0.38H65.4c0.35,0,0.67-0.14,0.9-0.38c0.23-0.23,0.38-0.55,0.38-0.9V38.24L66.67,38.24z" />
+                        </svg>-->
+                        <svg *ngIf="loans.typeLoan === 'Línea Blanca'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 viewBox="0 0 54.605 54.605" width="30" fill="currentColor" height="30" xml:space="preserve">
+<g>
+	<g>
+		<path style="fill: currentColor;" d="M42.537,0H12.068C10.239,0,8.75,1.489,8.75,3.318v7.992h37.104V3.318
+			C45.854,1.488,44.367,0,42.537,0z M44.046,9.501H10.56V3.318c0-0.831,0.677-1.508,1.508-1.508h30.469
+			c0.831,0,1.508,0.677,1.508,1.508V9.501z"/>
+		<path style="fill:currentColor;" d="M8.75,43.295v0.449v7.543c0,1.83,1.489,3.318,3.318,3.318h30.469c1.829,0,3.317-1.488,3.317-3.318
+			v-7.541v-0.45V12.651H8.75V43.295z M10.56,14.461h33.485v28.834H10.56V14.461z M10.56,45.104h33.485v6.184
+			c0,0.83-0.677,1.509-1.508,1.509H12.068c-0.832,0-1.508-0.679-1.508-1.509V45.104z"/>
+		<path style="fill:currentColor;" d="M20.314,3.72h-7.139c-0.999,0-1.811,0.812-1.811,1.811v1.408c0,0.999,0.812,1.81,1.811,1.81h7.139
+			c0.998,0,1.809-0.811,1.809-1.81V5.531C22.123,4.532,21.312,3.72,20.314,3.72z M20.917,6.939c0,0.332-0.27,0.604-0.603,0.604
+			h-7.139c-0.333,0-0.604-0.271-0.604-0.604V5.531c0-0.333,0.271-0.603,0.604-0.603h7.139c0.333,0,0.603,0.271,0.603,0.603V6.939z"
+			/>
+		<path style="fill:currentColor;" d="M40.501,27.901h-0.926c-0.53-6.283-5.807-11.235-12.222-11.235
+			c-6.768,0-12.273,5.506-12.273,12.274s5.505,12.272,12.273,12.272c6.242,0,11.4-4.687,12.167-10.724h0.98
+			c0.196,0,0.354-0.16,0.354-0.354v-1.88C40.854,28.059,40.698,27.901,40.501,27.901z M27.353,40.097
+			c-6.153,0-11.159-5.004-11.159-11.155c0-6.154,5.005-11.159,11.159-11.159c5.8,0,10.573,4.453,11.1,10.118h-1.12
+			c-0.523-5.049-4.796-9-9.98-9c-5.537,0-10.042,4.504-10.042,10.042c0,5.535,4.505,10.041,10.042,10.041
+			c5.007,0,9.166-3.69,9.914-8.492h1.129C37.639,35.908,32.979,40.097,27.353,40.097z M35.634,30.491h1.068
+			c-0.743,4.494-4.646,7.935-9.349,7.935c-5.23,0-9.484-4.254-9.484-9.483s4.254-9.485,9.484-9.485c4.876,0,8.895,3.704,9.417,8.444
+			h-1.137c-0.195,0-0.354,0.159-0.354,0.354v1.88C35.28,30.33,35.438,30.491,35.634,30.491z M40.147,29.782h-4.16V28.61h4.16V29.782
+			z"/>
+		<path style="fill:currentColor;" d="M22.373,22.226c-2.973,1.898-3.304,4.8-3.316,4.923c-0.02,0.194,0.121,0.367,0.315,0.388
+			c0.013,0.002,0.026,0.002,0.038,0.002c0.178,0,0.332-0.135,0.351-0.316c0.003-0.027,0.319-2.692,2.994-4.4
+			c0.164-0.105,0.213-0.324,0.107-0.489C22.757,22.167,22.537,22.12,22.373,22.226z"/>
+	</g>
+</g>
+
+</svg>
+                    </div>
+                    <h2 class="text-lg text-gray-900 font-medium title-font mb-2">{{loans.typeLoan}}</h2>
+                    <p class="leading-relaxed text-base">Tipo: {{loans.description.type}}</p>
+                    <p *ngIf="loans.typeLoan === 'Vehículo'" class="leading-relaxed text-base">Modelo:
+                        {{loans.description.mark}}</p>
+                    <p *ngIf="loans.typeLoan === 'Vehículo'" class="leading-relaxed text-base">Modelo:
+                        {{loans.description.model}}</p>
+                    <p *ngIf="loans.typeLoan === 'Vehículo'" class="leading-relaxed text-base">Año:
+                        {{loans.description.year}}</p>
+
+
+                    <p *ngIf="loans.typeLoan != 'Vehículo'" class="leading-relaxed text-base">Descripción:
+                        {{loans.description.description}}</p>
+                    <p *ngIf="loans.typeLoan === 'Inmobiliario'" class="leading-relaxed text-base">Dirección:
+                        {{loans.description.direction}}</p>
+
+                    <p class="leading-relaxed text-base font-medium">Usuario del préstamo:
+                      {{loans.idUser.username}}
+                    </p>
+                    <div *ngIf="loans.canceled === false" class="alert alert-info">
+                        <div class="flex-1 font-bold">
+                            <label>Estado de Cancelación: Sin Cancelar</label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="loans.canceled === true" class="alert alert-success">
+                        <div class="flex-1 font-bold">
+                            <label>Estado de Cancelación: Cancelado</label>
+                        </div>
+                    </div>
+                    <div class="py-3 px-6 text-center">
+                        <div class="flex item-center justify-center">
+                            <div (click)="showModalLoan = true; loanById(loans._id)"
+                                class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<div *ngIf="userLogged.rol ==='ROL_ADMIN'" class="bg-red-100">
+  <h1 class="text-red-800 pt-2 text-center">Préstamos Vencidos</h1>
+
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-2 mx-auto">
+        <div class="flex flex-wrap -m-4">
+            <div *ngFor="let loans of loansDeadLine" class="xl:w-1/3 md:w-1/2 p-4">
+                <div class="border border-gray-200 p-6 rounded-lg bg-gray-100">
+                    <div
+                        class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4">
+                        <svg *ngIf="loans.typeLoan === 'Vehículo'" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M23.5 7c.276 0 .5.224.5.5v.511c0 .793-.926.989-1.616.989l-1.086-2h2.202zm-1.441 3.506c.639 1.186.946 2.252.946 3.666 0 1.37-.397 2.533-1.005 3.981v1.847c0 .552-.448 1-1 1h-1.5c-.552 0-1-.448-1-1v-1h-13v1c0 .552-.448 1-1 1h-1.5c-.552 0-1-.448-1-1v-1.847c-.608-1.448-1.005-2.611-1.005-3.981 0-1.414.307-2.48.946-3.666.829-1.537 1.851-3.453 2.93-5.252.828-1.382 1.262-1.707 2.278-1.889 1.532-.275 2.918-.365 4.851-.365s3.319.09 4.851.365c1.016.182 1.45.507 2.278 1.889 1.079 1.799 2.101 3.715 2.93 5.252zm-16.059 2.994c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5.672 1.5 1.5 1.5 1.5-.672 1.5-1.5zm10 1c0-.276-.224-.5-.5-.5h-7c-.276 0-.5.224-.5.5s.224.5.5.5h7c.276 0 .5-.224.5-.5zm2.941-5.527s-.74-1.826-1.631-3.142c-.202-.298-.515-.502-.869-.566-1.511-.272-2.835-.359-4.441-.359s-2.93.087-4.441.359c-.354.063-.667.267-.869.566-.891 1.315-1.631 3.142-1.631 3.142 1.64.313 4.309.497 6.941.497s5.301-.184 6.941-.497zm2.059 4.527c0-.828-.672-1.5-1.5-1.5s-1.5.672-1.5 1.5.672 1.5 1.5 1.5 1.5-.672 1.5-1.5zm-18.298-6.5h-2.202c-.276 0-.5.224-.5.5v.511c0 .793.926.989 1.616.989l1.086-2z" />
+                        </svg>
+                        <svg *ngIf="loans.typeLoan === 'Inmobiliario'" fill="none" stroke="currentColor"
+                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-6 h-6"
+                            viewBox="0 0 24 24">
+                            <path d="M21 13v10h-6v-6h-6v6h-6v-10h-3l12-12 12 12h-3zm-1-5.907v-5.093h-3v2.093l3 3z" />
+                        </svg>
+                        <svg *ngIf="loans.typeLoan === 'Joyería'" xmlns="http://www.w3.org/2000/svg"
+                            stroke="currentColor" stroke-linecap="round" fill="currentColor" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M7.388 9h9.225l-4.613 14-4.612-14zm.612-2h8l-4-5.333-4 5.333zm10.5 0h5.5l-6-6h-4l4.5 6zm-13 0l4.5-6h-3.916l-6.084 6h5.5zm-5.5 2l9.234 12-3.955-12h-5.279zm18.721 0l-3.924 12 9.203-12h-5.279z" />
+                        </svg>
+
+                        <svg *ngIf="loans.typeLoan === 'Mobiliario'" width="24" height="24"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" clip-rule="evenodd">
+                            <path
+                                d="M24 19v-7c0-.265-.105-.52-.293-.707-.187-.188-.442-.293-.707-.293h-22c-.265 0-.52.105-.707.293-.188.187-.293.442-.293.707v7h1v-2h22v2h1zm-1-6.5c0-.133-.053-.26-.146-.354-.094-.093-.221-.146-.354-.146h-21c-.133 0-.26.053-.354.146-.093.094-.146.221-.146.354v3.5h22v-3.5zm-20-2.5v-3.5c0-.276.224-.5.5-.5h17c.276 0 .5.224.5.5v3.5h1v-4c0-.265-.105-.52-.293-.707-.187-.188-.442-.293-.707-.293h-18c-.265 0-.52.105-.707.293-.188.187-.293.442-.293.707v4h1zm2 0h6v-2c0-.552-.448-1-1-1h-4c-.552 0-1 .448-1 1v2zm8 0h6v-2c0-.552-.448-1-1-1h-4c-.552 0-1 .448-1 1v2zm-3-1v-.6c0-.221-.179-.4-.4-.4h-3.2c-.221 0-.4.179-.4.4v.6h4zm8 0v-.6c0-.221-.179-.4-.4-.4h-3.2c-.221 0-.4.179-.4.4v.6h4z" />
+                        </svg>
+
+                        <!--<svg *ngIf="loans.typeLoan === 'Línea Blanca'" xmlns="http://www.w3.org/2000/svg" width="24"
+                            height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M6.14,0H65.4c1.69,0,3.23,0.69,4.34,1.8c1.11,1.11,1.8,2.65,1.8,4.34v29.67v73.73c0,1.69-0.69,3.23-1.8,4.34 c-1.11,1.11-2.65,1.8-4.34,1.8h-4.89v2.72c0,2.47-2.02,4.49-4.49,4.49l0,0c-2.47,0-4.49-2.02-4.49-4.49v-2.72H20.17v2.72 c0,2.47-2.02,4.49-4.49,4.49l0,0c-2.47,0-4.49-2.02-4.49-4.49v-2.72H6.14c-1.69,0-3.23-0.69-4.34-1.8c-1.11-1.11-1.8-2.65-1.8-4.34 V35.81V6.14C0,4.45,0.69,2.91,1.8,1.8C2.91,0.69,4.45,0,6.14,0L6.14,0z M10.2,44.89c0-1.34,1.09-2.43,2.43-2.43 c1.34,0,2.43,1.09,2.43,2.43v20.4c0,1.34-1.09,2.43-2.43,2.43c-1.34,0-2.43-1.09-2.43-2.43V44.89L10.2,44.89z M10.2,10.39 c0-1.34,1.09-2.43,2.43-2.43c1.34,0,2.43,1.09,2.43,2.43v15.15c0,1.34-1.09,2.43-2.43,2.43c-1.34,0-2.43-1.09-2.43-2.43V10.39 L10.2,10.39z M4.87,33.37h61.81V6.14c0-0.35-0.14-0.67-0.38-0.9c-0.23-0.23-0.55-0.38-0.9-0.38H6.14c-0.35,0-0.67,0.14-0.9,0.38 c-0.23,0.23-0.38,0.55-0.38,0.9V33.37L4.87,33.37z M66.67,38.24H4.87v71.29c0,0.35,0.14,0.67,0.38,0.9 c0.23,0.23,0.55,0.38,0.9,0.38H65.4c0.35,0,0.67-0.14,0.9-0.38c0.23-0.23,0.38-0.55,0.38-0.9V38.24L66.67,38.24z" />
+                        </svg>-->
+                        <svg *ngIf="loans.typeLoan === 'Línea Blanca'" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 viewBox="0 0 54.605 54.605" width="30" fill="currentColor" height="30" xml:space="preserve">
+<g>
+	<g>
+		<path style="fill: currentColor;" d="M42.537,0H12.068C10.239,0,8.75,1.489,8.75,3.318v7.992h37.104V3.318
+			C45.854,1.488,44.367,0,42.537,0z M44.046,9.501H10.56V3.318c0-0.831,0.677-1.508,1.508-1.508h30.469
+			c0.831,0,1.508,0.677,1.508,1.508V9.501z"/>
+		<path style="fill:currentColor;" d="M8.75,43.295v0.449v7.543c0,1.83,1.489,3.318,3.318,3.318h30.469c1.829,0,3.317-1.488,3.317-3.318
+			v-7.541v-0.45V12.651H8.75V43.295z M10.56,14.461h33.485v28.834H10.56V14.461z M10.56,45.104h33.485v6.184
+			c0,0.83-0.677,1.509-1.508,1.509H12.068c-0.832,0-1.508-0.679-1.508-1.509V45.104z"/>
+		<path style="fill:currentColor;" d="M20.314,3.72h-7.139c-0.999,0-1.811,0.812-1.811,1.811v1.408c0,0.999,0.812,1.81,1.811,1.81h7.139
+			c0.998,0,1.809-0.811,1.809-1.81V5.531C22.123,4.532,21.312,3.72,20.314,3.72z M20.917,6.939c0,0.332-0.27,0.604-0.603,0.604
+			h-7.139c-0.333,0-0.604-0.271-0.604-0.604V5.531c0-0.333,0.271-0.603,0.604-0.603h7.139c0.333,0,0.603,0.271,0.603,0.603V6.939z"
+			/>
+		<path style="fill:currentColor;" d="M40.501,27.901h-0.926c-0.53-6.283-5.807-11.235-12.222-11.235
+			c-6.768,0-12.273,5.506-12.273,12.274s5.505,12.272,12.273,12.272c6.242,0,11.4-4.687,12.167-10.724h0.98
+			c0.196,0,0.354-0.16,0.354-0.354v-1.88C40.854,28.059,40.698,27.901,40.501,27.901z M27.353,40.097
+			c-6.153,0-11.159-5.004-11.159-11.155c0-6.154,5.005-11.159,11.159-11.159c5.8,0,10.573,4.453,11.1,10.118h-1.12
+			c-0.523-5.049-4.796-9-9.98-9c-5.537,0-10.042,4.504-10.042,10.042c0,5.535,4.505,10.041,10.042,10.041
+			c5.007,0,9.166-3.69,9.914-8.492h1.129C37.639,35.908,32.979,40.097,27.353,40.097z M35.634,30.491h1.068
+			c-0.743,4.494-4.646,7.935-9.349,7.935c-5.23,0-9.484-4.254-9.484-9.483s4.254-9.485,9.484-9.485c4.876,0,8.895,3.704,9.417,8.444
+			h-1.137c-0.195,0-0.354,0.159-0.354,0.354v1.88C35.28,30.33,35.438,30.491,35.634,30.491z M40.147,29.782h-4.16V28.61h4.16V29.782
+			z"/>
+		<path style="fill:currentColor;" d="M22.373,22.226c-2.973,1.898-3.304,4.8-3.316,4.923c-0.02,0.194,0.121,0.367,0.315,0.388
+			c0.013,0.002,0.026,0.002,0.038,0.002c0.178,0,0.332-0.135,0.351-0.316c0.003-0.027,0.319-2.692,2.994-4.4
+			c0.164-0.105,0.213-0.324,0.107-0.489C22.757,22.167,22.537,22.12,22.373,22.226z"/>
+	</g>
+</g>
+
+</svg>
+                    </div>
+                    <h2 class="text-lg text-gray-900 font-medium title-font mb-2">{{loans.typeLoan}}</h2>
+                    <p class="leading-relaxed text-base">Tipo: {{loans.description.type}}</p>
+                    <p *ngIf="loans.typeLoan === 'Vehículo'" class="leading-relaxed text-base">Modelo:
+                        {{loans.description.mark}}</p>
+                    <p *ngIf="loans.typeLoan === 'Vehículo'" class="leading-relaxed text-base">Modelo:
+                        {{loans.description.model}}</p>
+                    <p *ngIf="loans.typeLoan === 'Vehículo'" class="leading-relaxed text-base">Año:
+                        {{loans.description.year}}</p>
+
+
+                    <p *ngIf="loans.typeLoan != 'Vehículo'" class="leading-relaxed text-base">Descripción:
+                        {{loans.description.description}}</p>
+                    <p *ngIf="loans.typeLoan === 'Inmobiliario'" class="leading-relaxed text-base">Dirección:
+                        {{loans.description.direction}}</p>
+
+                        <p class="leading-relaxed text-base font-medium">Usuario del préstamo:
+                          {{loans.idUser.username}}
+                        </p>
+                        <p class="leading-relaxed text-red-500 font-medium">
+                          {{loans.message}}
+                        </p>
+                        <p class="leading-relaxed text-base font-medium">
+                          Mora a pagar:
+                          Q.{{loans.penalty}}
+                        </p>
+
+                    <div *ngIf="loans.canceled === false" class="alert alert-info">
+                        <div class="flex-1 font-bold">
+                            <label>Estado de Cancelación: Sin Cancelar</label>
+                        </div>
+                    </div>
+
+                    <div *ngIf="loans.canceled === true" class="alert alert-success">
+                        <div class="flex-1 font-bold">
+                            <label>Estado de Cancelación: Cancelado</label>
+                        </div>
+                    </div>
+                    <div class="py-3 px-6 text-center">
+                        <div class="flex item-center justify-center">
+                            <div (click)="showModalLoan = true; loanById(loans.idLoan)"
+                                class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</div>
+
+
+<div data-theme="light" class="modal-container">
+    <input type="checkbox" id="search-modal" [checked]="showModalLoan" class="modal-toggle">
+    <div class="modal overflow-auto bg-opacity-50 bg-blacks">
+        <div class="modal-box p-0 pt-6 text-left">
+
+            <div class="w-full bg-grey-500">
+                <div class="container mx-auto py-8">
+                    <div class="w-96 mx-auto bg-white rounded border border-green-500">
+                        <div class="container mx-auto my-4">
+                            <div>
+
+                                <div class="bg-white relative w-11/12 mx-auto">
+                                    <!--<div class="flex justify-center">
+                                      <img src="https://pantazisoft.com/img/avatar-2.jpeg" alt="" class="rounded-full mx-auto absolute -top-20 w-32 h-32 shadow-2xl border-4 border-white">
+                              </div>-->
+
+                                    <div class="mt-4">
+                                        <div class="my-5">
+                                            <a
+                                                class="text-gray-200 block font-bold text-center text-2xl leading-6 px-6 py-3 bg-green-500">Tipo:
+                                                {{getLoanById?.loan?.typeLoan}}
+                                                <span class="font-bold"></span></a>
+                                        </div>
+                                        <div class="w-full">
+                                            <h1 class="font-bold text-center text-3xl text-gray-900">
+                                                Descripción
+                                            </h1>
+                                            <p class="leading-relaxed text-base">Tipo: {{getLoanById?.loan?.description.type}}
+                                            </p>
+                                            <div class="mt-5 w-full">
+
+                                                <a
+                                                    class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+
+                                                    Fecha del Prestamo:
+                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loan?.loanDate | date:'shortDate'}}</span>
+                                                </a>
+
+                                                <a
+                                                    class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
+                                                    Fecha de Pago:
+                                                    <span
+                                                        class="text-gray-400 text-sm">{{getLoanById?.loan?.paymentDate | date:'shortDate'}}</span>
+                                                </a>
+                                            </div>
+                                            <div class="w-full flex-1 mx-2 svelte-1l8159u">
+                                                <div class=" flex item-center">
+                                                    <div class="w-1/2">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Abono</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.payment}}.00</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-1/2">
+                                                        <div
+                                                            class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                            Monto</div>
+                                                        <div class="flex items-center w-full">
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount}}.00</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class=" flex item-center">
+                                                  <div class="w-1/2">
+                                                      <div
+                                                          class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2">
+                                                          Resto del pago (Monto):</div>
+                                                      <div class="flex items-center w-full">
+                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.restPayment}}.00</p>
+                                                      </div>
+                                                  </div>
+                                                  <div class="w-1/2">
+                                                      <div
+                                                          class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2">
+                                                          Interés mensual</div>
+                                                      <div class="flex items-center w-full">
+                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterestPartial}}.00</p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class=" flex item-center mx-auto">
+                                                <div class="">
+                                                    <div
+                                                        class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
+                                                        Interés mensual actual:</div>
+                                                    <div class="flex items-center w-full">
+                                                        <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterest}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                                <div class="mb-4">
+                                                    <label *ngIf="getLoanById?.loan?.canceled === false"
+                                                        class="flex block text-grey-darker text-sm font-bold mb-2">Estado
+                                                        de
+                                                        Cancelación: <p class="pl-2 italic text-green-500">
+                                                            Sin Cancelar</p></label>
+                                                            <label *ngIf="getLoanById?.loan?.canceled === true"
+                                                        class="flex block text-grey-darker text-sm font-bold mb-2">Estado
+                                                        de
+                                                        Cancelación: <p class="pl-2 italic text-green-500">
+                                                            Cancelado</p></label>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="modal-action  rounded-b-2xl px-5 mt-2">
+
+                                <label (click)="showModalLoan = false" for="search-modal"
+                                    class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
+                            </div>
+                            <div class="modal-action  rounded-b-2xl px-5 mt-2">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

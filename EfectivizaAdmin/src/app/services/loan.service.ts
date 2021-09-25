@@ -26,6 +26,16 @@ export class LoanService {
 
   }
 
+  getLoans(token: any): Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', token);
+    return this.http.get(`${this.url}/getLoans`, {headers: headersToken});
+  }
+
+  getLoan(token: any, id: String):Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', token);
+    return this.http.get(`${this.url}/getLoan/${id}`, {headers: headersToken});
+  }
+
   addLoanClient(id: String, token: string, user: any):Observable<any>{
     let params = JSON.stringify(user);
     let headersToken = this.headersVar.set('Authorization', token);
@@ -41,6 +51,16 @@ export class LoanService {
   getLoanById(id: string, token):Observable<any>{
     let headersToken = this.headersVar.set('Authorization', token);
     return this.http.get(`${this.url}/getLoanById/${id}`, {headers: headersToken});
+  }
+
+  deadLineForInstallment(token): Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', token);
+    return this.http.get(`${this.url}/deadlineForInstallment`, {headers: headersToken});
+  }
+
+  deadLineForInstallmentUser(token,id: String): Observable<any>{
+    let headersToken = this.headersVar.set('Authorization', token);
+    return this.http.get(`${this.url}/deadlineForInstallmentUser/${id}`, {headers: headersToken});
   }
 
   deleteLoanById(id: string, token: any):Observable<any>{
