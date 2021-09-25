@@ -23,6 +23,7 @@ export class LoansClientComponent implements OnInit {
   loansRequest: any;
   getLoanById: any;
   minDate: Date;
+  loansDeadLine: any;
 
   constructor(private fmBuilder: FormBuilder,
     private userService: UserService,
@@ -40,6 +41,7 @@ export class LoansClientComponent implements OnInit {
     })
 
     this.getLoansClient();
+    this.deadLineForInstallmentUser();
 
     const yesterdayDays = new Date(Date.now());
     this.minDate = new Date(yesterdayDays)
@@ -113,11 +115,14 @@ export class LoansClientComponent implements OnInit {
   }
 
   loanById(id: string){
-    this.loanService.getLoanById(id, this.token).subscribe(
-      response=>{
-        this.getLoanById = response.foundLoan;
-      }
-    )
+    this.loanService.getLoan(this.token,id).subscribe(data =>{this.getLoanById = data})
+
+  }
+
+  deadLineForInstallmentUser(){
+
+    this.loanService.deadLineForInstallmentUser(this.token,this.idClient).subscribe(data =>{this.loansDeadLine = data})
+
   }
 
   editLoan(id: string){
