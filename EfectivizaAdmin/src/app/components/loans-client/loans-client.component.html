@@ -4,7 +4,7 @@
     <a (click)="showLoanModal = true" class="btn btn-primary ">Agregar Prestamo Cliente</a>
 </div>
 <h1 class="text-black pt-4 text-center">Todos los Préstamos Del Cliente</h1>
-<h1 *ngIf="loansRequest.length==0" class="text-black pt-4 text-center">El cliente no tiene ningún préstamo</h1>
+<h1 *ngIf="loansRequest?.length==0" class="text-black pt-4 text-center">El cliente no tiene ningún préstamo</h1>
 
 <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
@@ -88,17 +88,22 @@
                     <p *ngIf="loans.typeLoan === 'Inmobiliario'" class="leading-relaxed text-base">Dirección:
                         {{loans.description.direction}}</p>
 
-                    <div *ngIf="loans.canceled === false" class="alert alert-info">
+                    <div *ngIf="loans.canceled === 'Sin cancelar'" class="alert alert-info">
                         <div class="flex-1 font-bold">
                             <label>Estado de Cancelación: Sin Cancelar</label>
                         </div>
                     </div>
 
-                    <div *ngIf="loans.canceled === true" class="alert alert-success">
+                    <div *ngIf="loans.canceled === 'Cancelado con prenda'" class="alert alert-success">
                         <div class="flex-1 font-bold">
-                            <label>Estado de Cancelación: Cancelado</label>
+                            <label>Estado de Cancelación: Cancelado con prenda</label>
                         </div>
                     </div>
+                    <div *ngIf="loans.canceled === 'Cancelado con efectivo'" class="alert alert-success">
+                      <div class="flex-1 font-bold">
+                          <label>Estado de Cancelación: Cancelado con efectivo</label>
+                      </div>
+                  </div>
                     <div class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
                             <div (click)="getLoanModal = true; loanById(loans._id)"
@@ -136,7 +141,7 @@
     </div>
 </section>
 
-<div *ngIf="loansDeadLine.length !=0" class="bg-red-100">
+<div *ngIf="loansDeadLine?.length !=0" class="bg-red-100">
   <h1 class="text-red-800 pt-2 text-center">Préstamos Vencidos</h1>
 
   <section class="text-gray-600 body-font">
@@ -225,20 +230,25 @@
                         </p>
                         <p class="leading-relaxed text-base font-medium">
                           Mora a pagar:
-                          Q.{{loans.penalty}}
+                          Q.{{loans.penalty | number:'.2'}}
                         </p>
 
-                    <div *ngIf="loans.canceled === false" class="alert alert-info">
+                    <div *ngIf="loans.canceled == 'Sin cancelar'" class="alert alert-info">
                         <div class="flex-1 font-bold">
                             <label>Estado de Cancelación: Sin Cancelar</label>
                         </div>
                     </div>
 
-                    <div *ngIf="loans.canceled === true" class="alert alert-success">
+                    <div *ngIf="loans.canceled === 'Cancelado con prenda'" class="alert alert-success">
                         <div class="flex-1 font-bold">
-                            <label>Estado de Cancelación: Cancelado</label>
+                            <label>Estado de Cancelación: Cancelado con prenda</label>
                         </div>
                     </div>
+                    <div *ngIf="loans.canceled === 'Cancelado con efectivo'" class="alert alert-success">
+                      <div class="flex-1 font-bold">
+                          <label>Estado de Cancelación: Cancelado con efectivo</label>
+                      </div>
+                  </div>
                     <div class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
                             <div (click)="getLoanModal = true; loanById(loans.idLoan)"
@@ -591,7 +601,7 @@
                                                           class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                           Abono</div>
                                                       <div class="flex items-center w-full">
-                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.payment}}.00</p>
+                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.payment | number:'.2'}}</p>
                                                       </div>
                                                   </div>
                                                   <div class="w-1/2">
@@ -599,7 +609,7 @@
                                                           class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                           Monto</div>
                                                       <div class="flex items-center w-full">
-                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount}}.00</p>
+                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount | number:'.2'}}</p>
                                                       </div>
                                                   </div>
                                               </div>
@@ -609,7 +619,7 @@
                                                         class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2">
                                                         Resto del pago (Monto):</div>
                                                     <div class="flex items-center w-full">
-                                                        <p class="pr-2 text-2xl">Q. {{getLoanById?.restPayment}}.00</p>
+                                                        <p class="pr-2 text-2xl">Q. {{getLoanById?.restPayment | number:'.2'}}</p>
                                                     </div>
                                                 </div>
                                                 <div class="w-1/2">
@@ -617,7 +627,7 @@
                                                         class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2">
                                                         Interés mensual</div>
                                                     <div class="flex items-center w-full">
-                                                        <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterestPartial}}.00</p>
+                                                        <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterestPartial | number:'.2'}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -627,7 +637,7 @@
                                                       class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                       Interés mensual actual:</div>
                                                   <div class="flex items-center w-full">
-                                                      <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterest}}</p>
+                                                      <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterest | number:'.2'}}</p>
                                                   </div>
                                               </div>
                                           </div>
@@ -760,7 +770,7 @@
                                                             class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                             Monto</div>
                                                         <div class="flex items-center w-full">
-                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount}}.00</p>
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount| number:'.2'}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -774,8 +784,9 @@
                                                     <select formControlName="canceled" [value]="getLoanById?.loan?.canceled"
                                                         class=" border rounded w-full py-2 px-3 text-grey-darker">
                                                         <option>-- Estado de Cancelación --</option>
-                                                        <option>true</option>
-                                                        <option>false</option>
+                                                        <option>Sin cancelar</option>
+                                                        <option>Cancelado con prenda</option>
+                                                        <option>Cancelado con efectivo</option>
                                                     </select>
                                                     <p class="text-sm text-red-500 italic">Seleccione el estado de
                                                         cancelación</p>
@@ -791,7 +802,7 @@
 
                                 <label (click)="resetForm(); editLoanModal = false" for="search-modal"
                                     class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
-                                <button (click)="editLoan(getLoanById?._id)"
+                                <button (click)="editLoan(getLoanById?.loan?._id)"
                                     class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Editar
                                     Prestamo</button>
                             </div>
@@ -863,14 +874,14 @@
                                                     class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
 
                                                     Fecha del Prestamo:
-                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loan?.loanDate}}</span>
+                                                    <span class="text-gray-400 text-sm">{{getLoanById?.loan?.loanDate | date:'shortDate'}}</span>
                                                 </a>
 
                                                 <a
                                                     class="w-full border-t-2 border-gray-100 font-medium text-gray-600 py-4 px-4 w-full block hover:bg-gray-100 transition duration-150">
                                                     Fecha de Pago:
                                                     <span
-                                                        class="text-gray-400 text-sm">{{getLoanById?.loan?.paymentDate}}</span>
+                                                        class="text-gray-400 text-sm">{{getLoanById?.loan?.paymentDate | date:'shortDate'}}</span>
                                                 </a>
                                             </div>
                                             <div class="w-full flex-1 mx-2 svelte-1l8159u">
@@ -880,7 +891,7 @@
                                                             class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                             Abono</div>
                                                         <div class="flex items-center w-full">
-                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.payment}}.00</p>
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.payment | number:'.2'}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="w-1/2">
@@ -888,7 +899,7 @@
                                                             class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                             Monto</div>
                                                         <div class="flex items-center w-full">
-                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount}}.00</p>
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount | number:'.2'}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -923,7 +934,7 @@
 
                                 <label (click)="deleteLoanModal = false" for="search-modal"
                                     class="btn-modal-close btn btn-sm bg-white hover:bg-grey-300 hover:text-white text-black !font-medium">Cerrar</label>
-                                <button (click)="deleteLoan(getLoanById?._id)"
+                                <button (click)="deleteLoan(getLoanById?.loan?._id)"
                                     class="btn btn-sm bg-green-400 hover:bg-green-700 !font-medium">Eliminar
                                     Prestamo</button>
                             </div>

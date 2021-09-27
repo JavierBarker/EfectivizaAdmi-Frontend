@@ -85,17 +85,22 @@
                     <p class="leading-relaxed text-base font-medium">Usuario del préstamo:
                       {{loans.idUser.username}}
                     </p>
-                    <div *ngIf="loans.canceled === false" class="alert alert-info">
+                    <div *ngIf="loans.canceled == 'Sin cancelar'" class="alert alert-info">
                         <div class="flex-1 font-bold">
                             <label>Estado de Cancelación: Sin Cancelar</label>
                         </div>
                     </div>
 
-                    <div *ngIf="loans.canceled === true" class="alert alert-success">
+                    <div *ngIf="loans.canceled === 'Cancelado con prenda'" class="alert alert-success">
                         <div class="flex-1 font-bold">
-                            <label>Estado de Cancelación: Cancelado</label>
+                            <label>Estado de Cancelación: Cancelado con prenda</label>
                         </div>
                     </div>
+                    <div *ngIf="loans.canceled === 'Cancelado con efectivo'" class="alert alert-success">
+                      <div class="flex-1 font-bold">
+                          <label>Estado de Cancelación: Cancelado con efectivo</label>
+                      </div>
+                  </div>
                     <div class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
                             <div (click)="showModalLoan = true; loanById(loans._id)"
@@ -211,20 +216,25 @@
                         </p>
                         <p class="leading-relaxed text-base font-medium">
                           Mora a pagar:
-                          Q.{{loans.penalty}}
+                          Q.{{loans.penalty| number:'.2'}}
                         </p>
 
-                    <div *ngIf="loans.canceled === false" class="alert alert-info">
+                    <div *ngIf="loans.canceled == 'Sin cancelar'" class="alert alert-info">
                         <div class="flex-1 font-bold">
                             <label>Estado de Cancelación: Sin Cancelar</label>
                         </div>
                     </div>
 
-                    <div *ngIf="loans.canceled === true" class="alert alert-success">
+                    <div *ngIf="loans.canceled == 'Cancelado con prenda'" class="alert alert-success">
                         <div class="flex-1 font-bold">
-                            <label>Estado de Cancelación: Cancelado</label>
+                            <label>Estado de Cancelación: Cancelado con prenda</label>
                         </div>
                     </div>
+                    <div *ngIf="loans.canceled == 'Cancelado con efectivo'" class="alert alert-success">
+                      <div class="flex-1 font-bold">
+                          <label>Estado de Cancelación: Cancelado con efectivo</label>
+                      </div>
+                  </div>
                     <div class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
                             <div (click)="showModalLoan = true; loanById(loans.idLoan)"
@@ -301,7 +311,7 @@
                                                             class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                             Abono</div>
                                                         <div class="flex items-center w-full">
-                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.payment}}.00</p>
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.payment | number:'.2'}}</p>
                                                         </div>
                                                     </div>
                                                     <div class="w-1/2">
@@ -309,7 +319,7 @@
                                                             class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                             Monto</div>
                                                         <div class="flex items-center w-full">
-                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount}}.00</p>
+                                                            <p class="pr-2 text-2xl">Q. {{getLoanById?.loan?.amount | number:'.2'}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -319,7 +329,7 @@
                                                           class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2">
                                                           Resto del pago (Monto):</div>
                                                       <div class="flex items-center w-full">
-                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.restPayment}}.00</p>
+                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.restPayment | number:'.2'}}</p>
                                                       </div>
                                                   </div>
                                                   <div class="w-1/2">
@@ -327,7 +337,7 @@
                                                           class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2">
                                                           Interés mensual</div>
                                                       <div class="flex items-center w-full">
-                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterestPartial}}.00</p>
+                                                          <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterestPartial | number:'.2'}}</p>
                                                       </div>
                                                   </div>
                                               </div>
@@ -337,7 +347,7 @@
                                                         class="font-bold text-gray-600 text-xs leading-8 uppercase h-6 mx-2 mt-3">
                                                         Interés mensual actual:</div>
                                                     <div class="flex items-center w-full">
-                                                        <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterest}}</p>
+                                                        <p class="pr-2 text-2xl">Q. {{getLoanById?.monthInterest | number:'.2'}}</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -345,16 +355,21 @@
 
 
                                                 <div class="mb-4">
-                                                    <label *ngIf="getLoanById?.loan?.canceled === false"
+                                                    <label *ngIf="getLoanById?.loan?.canceled == 'Sin cancelar'"
                                                         class="flex block text-grey-darker text-sm font-bold mb-2">Estado
                                                         de
                                                         Cancelación: <p class="pl-2 italic text-green-500">
                                                             Sin Cancelar</p></label>
-                                                            <label *ngIf="getLoanById?.loan?.canceled === true"
+                                                            <label *ngIf="getLoanById?.loan?.canceled === 'Cancelado con prenda'"
                                                         class="flex block text-grey-darker text-sm font-bold mb-2">Estado
                                                         de
                                                         Cancelación: <p class="pl-2 italic text-green-500">
-                                                            Cancelado</p></label>
+                                                            Cancelado con prenda</p></label>
+                                                            <label *ngIf="getLoanById?.loan?.canceled === 'Cancelado con efectivo'"
+                                                        class="flex block text-grey-darker text-sm font-bold mb-2">Estado
+                                                        de
+                                                        Cancelación: <p class="pl-2 italic text-green-500">
+                                                            Cancelado con efectivo</p></label>
                                                 </div>
 
 
