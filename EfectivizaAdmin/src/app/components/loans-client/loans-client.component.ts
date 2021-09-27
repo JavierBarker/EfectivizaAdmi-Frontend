@@ -74,7 +74,7 @@ export class LoansClientComponent implements OnInit {
   editFormLoan(){
     return this.fmBuilder.group({
       payment: [0, Validators.required],
-      canceled: [Boolean, Validators.required]
+      canceled: ['', Validators.required]
     })
   }
 
@@ -143,6 +143,7 @@ export class LoansClientComponent implements OnInit {
         })
 
         this.getLoansClient();
+        this.deadLineForInstallmentUser();
         this.editLoanModal = false;
       },
       error=>{
@@ -171,6 +172,7 @@ export class LoansClientComponent implements OnInit {
         })
         this.deleteLoanModal = false;
         this.getLoansClient();
+        this.deadLineForInstallmentUser();
 
 
       },

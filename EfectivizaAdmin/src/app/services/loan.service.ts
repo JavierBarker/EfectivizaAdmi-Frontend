@@ -58,7 +58,7 @@ export class LoanService {
     return this.http.get(`${this.url}/deadlineForInstallment`, {headers: headersToken});
   }
 
-  deadLineForInstallmentUser(token,id: String): Observable<any>{
+  deadLineForInstallmentUser(token,id: any): Observable<any>{
     let headersToken = this.headersVar.set('Authorization', token);
     return this.http.get(`${this.url}/deadlineForInstallmentUser/${id}`, {headers: headersToken});
   }
