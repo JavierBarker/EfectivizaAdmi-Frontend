@@ -6,6 +6,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoansClientComponent } from './components/loans-client/loans-client.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
 
@@ -14,10 +15,10 @@ const routes: Routes = [
   {path: 'homePage', component: HomePageComponent, canActivate: [AuthGuard], children:[
     {path: 'mainPage', component: MainPageComponent},
     { path: 'clients', component: ClientsComponent },
-    {path: 'contact', component: ContactComponent},
     { path: 'loansClient/:id', component: LoansClientComponent },
     { path: '', pathMatch: 'full', redirectTo: 'mainPage' }
   ]},
+  {path:'notFound', component: NotFoundComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'login' },
 ];
 

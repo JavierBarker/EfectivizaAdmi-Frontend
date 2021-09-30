@@ -23,7 +23,7 @@ export class HomePageComponent implements OnInit {
     },
     {
       title: 'Contactos',
-      link: '/homePage/contact'
+      link: '/notFound'
     }
   ];
 
@@ -34,7 +34,7 @@ export class HomePageComponent implements OnInit {
     },
     {
       title: 'Contactos',
-      link: '/homePage/contact'
+      link: '/notFound'
     }
   ];
 
